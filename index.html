@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{margin:0;font-family:Segoe UI,Arial;background:#f4f6fb}
-header{background:#0f172a;color:white;padding:30px}
+header{background:#0f172a;color:white;padding:30px;text-align:center}
 .container{display:grid;grid-template-columns:1fr 2fr;gap:20px;max-width:1200px;margin:auto;padding:20px}
 @media(max-width:900px){.container{grid-template-columns:1fr}}
 .left{background:white;border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
@@ -24,6 +24,7 @@ input,textarea{width:100%;padding:8px;margin:5px 0}
 .order{border-bottom:1px solid #ddd;padding:10px 0}
 .confirm{background:#2563eb;color:white;margin-top:5px}
 .delete{background:#dc2626;color:white;margin-top:5px}
+.admin-only{display:none}
 </style>
 </head>
 <body>
@@ -39,8 +40,7 @@ input,textarea{width:100%;padding:8px;margin:5px 0}
 <div class="left">
 <h2>À propos</h2>
 <p>
-Nous proposons des <b>produits digitaux premium</b> :
-formations, business packs, logiciels, graphisme et ressources professionnelles.
+Nous proposons des <b>produits digitaux premium</b> : formations, business packs, logiciels, graphisme et ressources professionnelles.
 Paiement simple par Mobile Money et livraison rapide via WhatsApp.
 </p>
 
@@ -72,17 +72,20 @@ Paiement simple par Mobile Money et livraison rapide via WhatsApp.
 const ADMIN_PASSWORD="Francky501";
 const WHATSAPP="241066509602";
 
+// Produits par défaut
 let products=JSON.parse(localStorage.getItem("products"))||[
-{title:"Pack Formations",price:"2 500 FCFA",img:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f",desc:"Apprenez de nouveaux métiers"},
-{title:"Pack Business",price:"2 500 FCFA",img:"https://images.unsplash.com/photo-1507679799987-c73779587ccf",desc:"Entreprendre efficacement"},
-{title:"Pack Logiciels",price:"2 500 FCFA",img:"https://images.unsplash.com/photo-1518770660439-4636190af475",desc:"Outils professionnels"},
-{title:"SUPER PACK COMPLET",price:"15 000 FCFA",img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d",desc:"Tout en un"}
+{title:"Pack Formations",price:"2 500 FCFA",img:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=60",desc:"Apprenez de nouveaux métiers"},
+{title:"Pack Business",price:"2 500 FCFA",img:"https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=60",desc:"Entreprendre efficacement"},
+{title:"Pack Logiciels",price:"2 500 FCFA",img:"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=60",desc:"Outils professionnels"},
+{title:"SUPER PACK COMPLET",price:"15 000 FCFA",img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=60",desc:"Tout en un"}
 ];
 
 let orders=JSON.parse(localStorage.getItem("orders"))||[];
 
+// Affichage produits
 function render(){
-const p=document.getElementById("products");p.innerHTML="";
+const p=document.getElementById("products");
+p.innerHTML="";
 products.forEach((x,i)=>{
 p.innerHTML+=`
 <div class="card">
@@ -92,26 +95,41 @@ p.innerHTML+=`
 <p>${x.desc}</p>
 <p class="price">${x.price}</p>
 <button class="buy" onclick="buy(${i})">Acheter</button>
-<button class="delete" onclick="removeProduct(${i})">Supprimer</button>
+<button class="delete admin-only" onclick="removeProduct(${i})">Supprimer</button>
 </div>
 </div>`;
 });
 }
+
+// Achat
 function buy(i){
 const name=prompt("Votre nom");
 const email=prompt("Votre email");
+if(!name || !email) return;
 orders.push({product:products[i].title,name,email,status:"En attente"});
 localStorage.setItem("orders",JSON.stringify(orders));
 const msg=encodeURIComponent(Bonjour je souhaite acheter ${products[i].title}\nNom:${name}\nEmail:${email});
 window.open("https://wa.me/"+WHATSAPP+"?text="+msg,"_blank");
 }
+
+// Login admin
 function adminLogin(){
 const p=prompt("Mot de passe admin");
 if(p===ADMIN_PASSWORD){
 document.getElementById("admin").classList.remove("hidden");
+showAdminControls();
 renderOrders();
 }else alert("Mot de passe incorrect");
 }
+
+// Afficher boutons admin
+function showAdminControls(){
+document.querySelectorAll(".admin-only").forEach(el=>{
+el.style.display="block";
+});
+}
+
+// Affichage commandes
 function renderOrders(){
 const o=document.getElementById("orders");o.innerHTML="";
 orders.forEach((x,i)=>{
@@ -123,25 +141,44 @@ o.innerHTML+=`
 </div>`;
 });
 }
-function confirmOrder(i){orders[i].status="Envoyé";localStorage.setItem("orders",JSON.stringify(orders));renderOrders();}
-function deleteOrder(i){orders.splice(i,1);localStorage.setItem("orders",JSON.stringify(orders));renderOrders();}
+
+// Confirmer commande
+function confirmOrder(i){
+orders[i].status="Envoyé";
+localStorage.setItem("orders",JSON.stringify(orders));
+renderOrders();
+}
+
+// Supprimer commande
+function deleteOrder(i){
+orders.splice(i,1);
+localStorage.setItem("orders",JSON.stringify(orders));
+renderOrders();
+}
+
+// Ajouter produit
 function addProduct(){
-products.push({
-title:ptitle.value,
-price:pprice.value,
-img:pimg.value,
-desc:pdesc.value
-});
+const title=document.getElementById("ptitle").value;
+const price=document.getElementById("pprice").value;
+const img=document.getElementById("pimg").value;
+const desc=document.getElementById("pdesc").value;
+if(!title || !price || !img) {alert("Veuillez remplir tous les champs"); return;}
+products.push({title,price,img,desc});
 localStorage.setItem("products",JSON.stringify(products));
 render();
 }
+
+// Supprimer produit
 function removeProduct(i){
 products.splice(i,1);
 localStorage.setItem("products",JSON.stringify(products));
 render();
 }
+
+// Initial render
 render();
 </script>
 
 </body>
 </html>
+
