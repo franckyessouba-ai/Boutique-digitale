@@ -2,163 +2,146 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Boutique Digitale</title>
+<title>Boutique Digitale | Produits & Formations</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{font-family:Arial;background:#f4f6fb;margin:0}
-header{background:#4f46e5;color:#fff;padding:20px;text-align:center}
-.container{max-width:1200px;margin:auto;padding:20px}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}
-.card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
-.price{color:#4f46e5;font-weight:bold}
-button{padding:10px;border:none;border-radius:6px;cursor:pointer;width:100%}
-.buy{background:#16a34a;color:#fff}
-.admin-btn{background:#111827;color:#fff;margin-top:30px}
-input,textarea{width:100%;padding:8px;margin:6px 0}
+body{margin:0;font-family:Segoe UI,Arial;background:#f4f6fb}
+header{background:#0f172a;color:white;padding:30px}
+.container{display:grid;grid-template-columns:1fr 2fr;gap:20px;max-width:1200px;margin:auto;padding:20px}
+@media(max-width:900px){.container{grid-template-columns:1fr}}
+.left{background:white;border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+.right{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.1)}
+.card img{width:100%;height:160px;object-fit:cover}
+.card .content{padding:15px}
+.price{color:#4f46e5;font-weight:bold;font-size:18px}
+button{padding:10px;border:none;border-radius:8px;width:100%;cursor:pointer}
+.buy{background:#16a34a;color:white}
+.admin-btn{background:#0f172a;color:white;margin-top:20px}
 .hidden{display:none}
-.pending{background:#fff;padding:10px;border-radius:8px;margin:8px 0}
-.confirm{background:#2563eb;color:#fff;margin-top:5px}
-.delete{background:#dc2626;color:#fff;margin-top:5px}
+input,textarea{width:100%;padding:8px;margin:5px 0}
+.admin-box{background:white;padding:20px;border-radius:12px;margin-top:30px}
+.order{border-bottom:1px solid #ddd;padding:10px 0}
+.confirm{background:#2563eb;color:white;margin-top:5px}
+.delete{background:#dc2626;color:white;margin-top:5px}
 </style>
 </head>
 <body>
 
 <header>
-<h1>Boutique de Produits Digitaux</h1>
-<p>Paiement & livraison via WhatsApp</p>
+<h1>Boutique Digitale</h1>
+<p>Formations, packs business & ressources numériques</p>
 </header>
 
 <div class="container">
 
-<div class="products" id="products"></div>
+<!-- GAUCHE -->
+<div class="left">
+<h2>À propos</h2>
+<p>
+Nous proposons des <b>produits digitaux premium</b> :
+formations, business packs, logiciels, graphisme et ressources professionnelles.
+Paiement simple par Mobile Money et livraison rapide via WhatsApp.
+</p>
 
-<!-- FORMULAIRE -->
-<div id="form" class="hidden">
-<h2>Vos informations</h2>
-<input id="name" placeholder="Votre nom">
-<input id="email" placeholder="Votre email">
-<button class="buy" onclick="sendWhatsApp()">Continuer vers WhatsApp</button>
-</div>
+<a href="https://wa.me/241066509602" target="_blank">
+<button class="buy">Nous contacter sur WhatsApp</button>
+</a>
 
 <button class="admin-btn" onclick="adminLogin()">Accès Admin</button>
 
-<div id="admin" class="hidden">
-<h2>Commandes en attente</h2>
+<div id="admin" class="admin-box hidden">
+<h3>Admin - Commandes</h3>
 <div id="orders"></div>
+
+<h3>Gestion des produits</h3>
+<input id="ptitle" placeholder="Nom du produit">
+<input id="pprice" placeholder="Prix">
+<input id="pimg" placeholder="URL de l'image">
+<textarea id="pdesc" placeholder="Description"></textarea>
+<button onclick="addProduct()">Ajouter produit</button>
 </div>
+</div>
+
+<!-- DROITE -->
+<div class="right" id="products"></div>
 
 </div>
 
 <script>
-const WHATSAPP = "241066509602";
-const ADMIN_PASSWORD = "Francky501";
+const ADMIN_PASSWORD="Francky501";
+const WHATSAPP="241066509602";
 
-const PRODUCTS = [
-"Pack Dessins Animés Anglais & Informatique",
-"Pack Dessins Animés Bibliques",
-"Pack Dessins Animés Coraniques",
-"Mega Pack Business & Entrepreneuriat",
-"Formation BTP & Architecture",
-"Coffres-forts Graphisme & Montage Vidéo",
-"Pack Logiciels Adobe & Office",
-"Ressources Développement Web (50Go)",
-"Coffres-forts Présentations & Infographies",
-"Formation Coiffure",
-"Formation Anglais Complète",
-"Formation Comptabilité",
-"Formation Bureautique",
-"Formation Agriculture & Élevage",
-"Formation Import-Export",
-"Formation E-commerce",
-"Formation Technicien Informatique",
-"Formation Montage Vidéo",
-"Formation CapCut Pro",
-"Formation Canva Pro",
-"Pack IA & Prompts",
-"Pack Applications Premium",
-"Pack IPTV & Streaming",
-"Pack Templates Business",
-"Pack Thèmes WordPress",
-"Pack Plugins WordPress",
-"Pack CV & Lettres Pro",
-"Pack Marketing Digital",
-"Pack Réseaux Sociaux",
-"Pack Création d’Entreprise",
-"Pack Coaching Personnel",
-"Pack Leadership",
-"Pack Développement Personnel"
+let products=JSON.parse(localStorage.getItem("products"))||[
+{title:"Pack Formations",price:"2 500 FCFA",img:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f",desc:"Apprenez de nouveaux métiers"},
+{title:"Pack Business",price:"2 500 FCFA",img:"https://images.unsplash.com/photo-1507679799987-c73779587ccf",desc:"Entreprendre efficacement"},
+{title:"Pack Logiciels",price:"2 500 FCFA",img:"https://images.unsplash.com/photo-1518770660439-4636190af475",desc:"Outils professionnels"},
+{title:"SUPER PACK COMPLET",price:"15 000 FCFA",img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d",desc:"Tout en un"}
 ];
 
-let currentProduct = "";
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
+let orders=JSON.parse(localStorage.getItem("orders"))||[];
 
-const productsDiv = document.getElementById("products");
-PRODUCTS.forEach(p=>{
-productsDiv.innerHTML+=`
+function render(){
+const p=document.getElementById("products");p.innerHTML="";
+products.forEach((x,i)=>{
+p.innerHTML+=`
 <div class="card">
-<h3>${p}</h3>
-<p class="price">2 500 FCFA</p>
-<button class="buy" onclick="order('${p}')">Acheter</button>
+<img src="${x.img}">
+<div class="content">
+<h3>${x.title}</h3>
+<p>${x.desc}</p>
+<p class="price">${x.price}</p>
+<button class="buy" onclick="buy(${i})">Acheter</button>
+<button class="delete" onclick="removeProduct(${i})">Supprimer</button>
+</div>
 </div>`;
 });
-
-function order(p){
-currentProduct=p;
-document.getElementById("form").classList.remove("hidden");
 }
-
-function sendWhatsApp(){
-const name=document.getElementById("name").value;
-const email=document.getElementById("email").value;
-if(!name||!email)return alert("Veuillez remplir les champs");
-
-orders.push({name,email,product:currentProduct,date:new Date().toLocaleString(),status:"En attente"});
+function buy(i){
+const name=prompt("Votre nom");
+const email=prompt("Votre email");
+orders.push({product:products[i].title,name,email,status:"En attente"});
 localStorage.setItem("orders",JSON.stringify(orders));
-
-const msg=encodeURIComponent(
-`Bonjour, je souhaite acheter : ${currentProduct}
-Nom : ${name}
-Email : ${email}
-Prix : 2 500 FCFA`
-);
+const msg=encodeURIComponent(Bonjour je souhaite acheter ${products[i].title}\nNom:${name}\nEmail:${email});
 window.open("https://wa.me/"+WHATSAPP+"?text="+msg,"_blank");
 }
-
 function adminLogin(){
-const pass=prompt("Mot de passe admin");
-if(pass===ADMIN_PASSWORD){
+const p=prompt("Mot de passe admin");
+if(p===ADMIN_PASSWORD){
 document.getElementById("admin").classList.remove("hidden");
 renderOrders();
 }else alert("Mot de passe incorrect");
 }
-
 function renderOrders(){
 const o=document.getElementById("orders");o.innerHTML="";
 orders.forEach((x,i)=>{
 o.innerHTML+=`
-<div class="pending">
-<b>${x.product}</b><br>
-${x.name} - ${x.email}<br>
-${x.date} - ${x.status}
-<button class="confirm" onclick="confirm(${i})">Confirmer envoi</button>
-<button class="delete" onclick="remove(${i})">Supprimer</button>
+<div class="order">
+<b>${x.product}</b><br>${x.name} - ${x.email}<br>${x.status}
+<button class="confirm" onclick="confirmOrder(${i})">Confirmer</button>
+<button class="delete" onclick="deleteOrder(${i})">Supprimer</button>
 </div>`;
 });
 }
-
-function confirm(i){
-orders[i].status="Envoyé";
-localStorage.setItem("orders",JSON.stringify(orders));
-renderOrders();
+function confirmOrder(i){orders[i].status="Envoyé";localStorage.setItem("orders",JSON.stringify(orders));renderOrders();}
+function deleteOrder(i){orders.splice(i,1);localStorage.setItem("orders",JSON.stringify(orders));renderOrders();}
+function addProduct(){
+products.push({
+title:ptitle.value,
+price:pprice.value,
+img:pimg.value,
+desc:pdesc.value
+});
+localStorage.setItem("products",JSON.stringify(products));
+render();
 }
-
-function remove(i){
-orders.splice(i,1);
-localStorage.setItem("orders",JSON.stringify(orders));
-renderOrders();
+function removeProduct(i){
+products.splice(i,1);
+localStorage.setItem("products",JSON.stringify(products));
+render();
 }
+render();
 </script>
 
 </body>
-
 </html>
