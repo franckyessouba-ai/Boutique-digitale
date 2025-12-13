@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Boutique Digitale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;background:#f4f6fb;margin:0}
+header{background:#4f46e5;color:#fff;padding:20px;text-align:center}
+.container{max-width:1200px;margin:auto;padding:20px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}
+.card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.price{color:#4f46e5;font-weight:bold}
+button{padding:10px;border:none;border-radius:6px;cursor:pointer;width:100%}
+.buy{background:#16a34a;color:#fff}
+.admin-btn{background:#111827;color:#fff;margin-top:30px}
+input,textarea{width:100%;padding:8px;margin:6px 0}
+.hidden{display:none}
+.pending{background:#fff;padding:10px;border-radius:8px;margin:8px 0}
+.confirm{background:#2563eb;color:#fff;margin-top:5px}
+.delete{background:#dc2626;color:#fff;margin-top:5px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Boutique de Produits Digitaux</h1>
+<p>Paiement & livraison via WhatsApp</p>
+</header>
+
+<div class="container">
+
+<div class="products" id="products"></div>
+
+<!-- FORMULAIRE -->
+<div id="form" class="hidden">
+<h2>Vos informations</h2>
+<input id="name" placeholder="Votre nom">
+<input id="email" placeholder="Votre email">
+<button class="buy" onclick="sendWhatsApp()">Continuer vers WhatsApp</button>
+</div>
+
+<button class="admin-btn" onclick="adminLogin()">Accès Admin</button>
+
+<div id="admin" class="hidden">
+<h2>Commandes en attente</h2>
+<div id="orders"></div>
+</div>
+
+</div>
+
+<script>
+const WHATSAPP = "241066509602";
+const ADMIN_PASSWORD = "1234";
+
+const PRODUCTS = [
+"Pack Dessins Animés Anglais & Informatique",
+"Pack Dessins Animés Bibliques",
+"Pack Dessins Animés Coraniques",
+"Mega Pack Business & Entrepreneuriat",
+"Formation BTP & Architecture",
+"Coffres-forts Graphisme & Montage Vidéo",
+"Pack Logiciels Adobe & Office",
+"Ressources Développement Web (50Go)",
+"Coffres-forts Présentations & Infographies",
+"Formation Coiffure",
+"Formation Anglais Complète",
+"Formation Comptabilité",
+"Formation Bureautique",
+"Formation Agriculture & Élevage",
+"Formation Import-Export",
+"Formation E-commerce",
+"Formation Technicien Informatique",
+"Formation Montage Vidéo",
+"Formation CapCut Pro",
+"Formation Canva Pro",
+"Pack IA & Prompts",
+"Pack Applications Premium",
+"Pack IPTV & Streaming",
+"Pack Templates Business",
+"Pack Thèmes WordPress",
+"Pack Plugins WordPress",
+"Pack CV & Lettres Pro",
+"Pack Marketing Digital",
+"Pack Réseaux Sociaux",
+"Pack Création d’Entreprise",
+"Pack Coaching Personnel",
+"Pack Leadership",
+"Pack Développement Personnel"
+];
+
+let currentProduct = "";
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+const productsDiv = document.getElementById("products");
+PRODUCTS.forEach(p=>{
+productsDiv.innerHTML+=`
+<div class="card">
+<h3>${p}</h3>
+<p class="price">2 500 FCFA</p>
+<button class="buy" onclick="order('${p}')">Acheter</button>
+</div>`;
+});
+
+function order(p){
+currentProduct=p;
+document.getElementById("form").classList.remove("hidden");
+}
+
+function sendWhatsApp(){
+const name=document.getElementById("name").value;
+const email=document.getElementById("email").value;
+if(!name||!email)return alert("Veuillez remplir les champs");
+
+orders.push({name,email,product:currentProduct,date:new Date().toLocaleString(),status:"En attente"});
+localStorage.setItem("orders",JSON.stringify(orders));
+
+const msg=encodeURIComponent(
+`Bonjour, je souhaite acheter : ${currentProduct}
+Nom : ${name}
+Email : ${email}
+Prix : 2 500 FCFA`
+);
+window.open("https://wa.me/"+WHATSAPP+"?text="+msg,"_blank");
+}
+
+function adminLogin(){
+const pass=prompt("Mot de passe admin");
+if(pass===ADMIN_PASSWORD){
+document.getElementById("admin").classList.remove("hidden");
+renderOrders();
+}else alert("Mot de passe incorrect");
+}
+
+function renderOrders(){
+const o=document.getElementById("orders");o.innerHTML="";
+orders.forEach((x,i)=>{
+o.innerHTML+=`
+<div class="pending">
+<b>${x.product}</b><br>
+${x.name} - ${x.email}<br>
+${x.date} - ${x.status}
+<button class="confirm" onclick="confirm(${i})">Confirmer envoi</button>
+<button class="delete" onclick="remove(${i})">Supprimer</button>
+</div>`;
+});
+}
+
+function confirm(i){
+orders[i].status="Envoyé";
+localStorage.setItem("orders",JSON.stringify(orders));
+renderOrders();
+}
+
+function remove(i){
+orders.splice(i,1);
+localStorage.setItem("orders",JSON.stringify(orders));
+renderOrders();
+}
+</script>
+
+</body>
+</html>
