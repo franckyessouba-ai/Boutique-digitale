@@ -1,165 +1,142 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!--
+EMMANUEL DIGITAL STORE
+Site statique complet compatible GitHub Pages
+Auteur : Emmanuel
+--><!DOCTYPE html><html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Boutique Digitale</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{font-family:Arial;background:#f4f6fb;margin:0}
-header{background:#4f46e5;color:#fff;padding:20px;text-align:center}
-.container{max-width:1200px;margin:auto;padding:20px}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}
-.card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
-.price{color:#4f46e5;font-weight:bold}
-button{padding:10px;border:none;border-radius:6px;cursor:pointer;width:100%}
-.buy{background:#16a34a;color:#fff}
-.admin-btn{background:#111827;color:#fff;margin-top:30px}
-input,textarea{width:100%;padding:8px;margin:6px 0}
-.hidden{display:none}
-.pending{background:#fff;padding:10px;border-radius:8px;margin:8px 0}
-.confirm{background:#2563eb;color:#fff;margin-top:5px}
-.delete{background:#dc2626;color:#fff;margin-top:5px}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emmanuel Digital Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;font-family:'Poppins',sans-serif}
+    body{margin:0;background:#f4f6fb;color:#1f2937}
+    header{background:linear-gradient(135deg,#1e3a8a,#4f46e5);color:#fff;padding:40px}
+    header h1{margin:0;font-size:32px}
+    header span{background:#22c55e;padding:6px 14px;border-radius:20px;font-size:13px;margin-left:10px}
+    .container{display:grid;grid-template-columns:1fr 2fr;gap:30px;padding:40px}
+    .about{background:#fff;padding:25px;border-radius:12px}
+    .about h2{margin-top:0}
+    .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+    .card{background:#fff;border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.08);overflow:hidden}
+    .card img{width:100%;height:160px;object-fit:cover}
+    .card .content{padding:15px}
+    .badge{background:#f97316;color:#fff;font-size:12px;padding:4px 10px;border-radius:20px;display:inline-block}
+    .price{font-weight:700;margin:10px 0}
+    .btn{display:block;width:100%;padding:10px;border:none;border-radius:8px;background:#4f46e5;color:#fff;font-weight:600;cursor:pointer}
+    .btn:hover{background:#3730a3}
+    .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+    .modal-content{background:#fff;padding:25px;border-radius:12px;width:90%;max-width:400px}
+    .modal-content h3{margin-top:0}
+    input,select{width:100%;padding:10px;margin-bottom:10px;border-radius:6px;border:1px solid #ccc}
+    footer{text-align:center;padding:20px;font-size:14px;color:#6b7280}
+    .whatsapp-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:14px 18px;border-radius:50px;font-weight:600;text-decoration:none}
+  </style>
 </head>
-<body>
+<body><header>
+  <h1>Emmanuel Digital Store <span>Produits & Formations digitales</span></h1>
+  <p>Votre plateforme de ressources numériques premium</p>
+</header><div class="container">
+  <div class="about">
+    <h2>À propos</h2>
+    <p><strong>Emmanuel Digital Store</strong> propose des formations, packs business, ressources digitales et outils professionnels accessibles à tous.</p>
+    <ul>
+      <li>📘 Produits numériques</li>
+      <li>🎓 Formations professionnelles</li>
+      <li>💼 Business & entrepreneuriat</li>
+      <li>💻 Ressources digitales premium</li>
+    </ul>
+  </div>  <div class="products" id="products"></div>
+</div><footer>
+  © 2025 Emmanuel Digital Store — Tous droits réservés
+</footer><a class="whatsapp-float" href="https://wa.me/241066509602" target="_blank">WhatsApp</a>
 
-<header>
-<h1>Boutique de Produits Digitaux</h1>
-<p>Paiement & livraison via WhatsApp</p>
-</header>
+<!-- MODAL --><div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Finaliser la commande</h3>
+    <input id="name" placeholder="Nom et prénom" required>
+    <input id="email" type="email" placeholder="Email valide" required>
+    <input id="phone" placeholder="Numéro WhatsApp" required>
+    <select id="country">
+      <option>Pays de résidence</option>
+      <option>Gabon</option>
+      <option>Cameroun</option>
+      <option>France</option>
+      <option>Autre</option>
+    </select>
+    <button class="btn" onclick="confirmOrder()">Continuer sur WhatsApp</button>
+  </div>
+</div><script>
+const rate = 655;
+const products = [
+  // PRODUITS INDIVIDUELS (2500 FCFA)
+  {id:1,title:'Pack Dessins Animés Anglais & Informatique',price:2500,desc:'Apprentissage ludique pour enfants en anglais et informatique.',badge:'Produit'},
+  {id:2,title:'Pack Dessins Animés Bibliques',price:2500,desc:'Dessins animés éducatifs à valeurs chrétiennes.',badge:'Produit'},
+  {id:3,title:'Pack Dessins Animés Coraniques',price:2500,desc:'Dessins animés éducatifs à valeurs islamiques.',badge:'Produit'},
+  {id:4,title:'Mega Pack Business & Entrepreneuriat',price:2500,desc:'Ressources complètes pour lancer et développer un business.',badge:'Produit'},
+  {id:5,title:'Formation BTP & Architecture',price:2500,desc:'Bases du BTP, plans et logiciels professionnels.',badge:'Produit'},
+  {id:6,title:'Coffre-fort Graphisme & Montage Vidéo',price:2500,desc:'Templates, ressources et outils créatifs.',badge:'Produit'},
+  {id:7,title:'Pack Logiciels Adobe & Office',price:2500,desc:'Suite de logiciels professionnels incontournables.',badge:'Produit'},
+  {id:8,title:'Ressources Développement Web (50 Go)',price:2500,desc:'Thèmes, plugins et scripts web premium.',badge:'Produit'},
+  {id:9,title:'Coffre-fort Présentations & Infographies',price:2500,desc:'Plus de 15 000 modèles prêts à l’emploi.',badge:'Produit'},
+  {id:10,title:'Formation Coiffure Professionnelle',price:2500,desc:'Apprenez la coiffure moderne étape par étape.',badge:'Produit'},
+  {id:11,title:'Formation Anglais (50 cours)',price:2500,desc:'Améliorez votre anglais rapidement.',badge:'Produit'},
+  {id:12,title:'Formation Bureautique & Comptabilité',price:2500,desc:'Maîtrisez Word, Excel et la comptabilité.',badge:'Produit'},
+  {id:13,title:'Formation Agriculture & Élevage',price:2500,desc:'Techniques modernes agricoles.',badge:'Produit'},
+  {id:14,title:'Formation E-commerce & Import-Export',price:2500,desc:'Vendez et importez efficacement.',badge:'Produit'},
+  {id:15,title:'Formation Technicien Informatique',price:2500,desc:'Maintenance et réseaux informatiques.',badge:'Produit'},
+  {id:16,title:'Formation Montage Vidéo (CapCut)',price:2500,desc:'Créez des vidéos professionnelles.',badge:'Produit'},
+  {id:17,title:'Formation Métiers du Digital',price:2500,desc:'Compétences digitales très demandées.',badge:'Produit'},
+  {id:18,title:'Pack IPTV & Streaming',price:2500,desc:'Accès à des contenus multimédias.',badge:'Produit'},
+  {id:19,title:'Pack Applications Premium',price:2500,desc:'Applications utiles version premium.',badge:'Produit'},
+  {id:20,title:'Pack Canva Pro & Templates',price:2500,desc:'Design rapide et professionnel.',badge:'Produit'},
+  {id:21,title:'Pack Intelligence Artificielle',price:2500,desc:'Prompts et formations IA.',badge:'Produit'},
+  {id:22,title:'Pack Livres Audio & PDF',price:2500,desc:'Bibliothèque de savoir numérique.',badge:'Produit'},
+  {id:23,title:'Pack Marketing Digital',price:2500,desc:'Stratégies pour vendre en ligne.',badge:'Produit'},
+  {id:24,title:'Pack Réseaux Sociaux',price:2500,desc:'Développez votre audience.',badge:'Produit'},
+  {id:25,title:'Pack Création d’Entreprise',price:2500,desc:'Guides et documents légaux.',badge:'Produit'},
 
-<div class="container">
+  // MINI PACKS
+  {id:26,title:'Mini Pack Formations',price:5000,desc:'Regroupe plusieurs formations clés.',badge:'Mini Pack'},
+  {id:27,title:'Mini Pack Business',price:5000,desc:'Outils et formations business.',badge:'Mini Pack'},
+  {id:28,title:'Mini Pack Logiciels & Multimédia',price:5000,desc:'Logiciels et ressources créatives.',badge:'Mini Pack'},
+  {id:29,title:'Mini Pack Web & Design',price:5000,desc:'Ressources web professionnelles.',badge:'Mini Pack'},
 
-<div class="products" id="products"></div>
-
-<!-- FORMULAIRE -->
-<div id="form" class="hidden">
-<h2>Vos informations</h2>
-<input id="name" placeholder="Votre nom">
-<input id="email" placeholder="Votre email">
-<button class="buy" onclick="sendWhatsApp()">Continuer vers WhatsApp</button>
-</div>
-
-<button class="admin-btn" onclick="adminLogin()">Accès Admin</button>
-
-<div id="admin" class="hidden">
-<h2>Commandes en attente</h2>
-<div id="orders"></div>
-</div>
-
-</div>
-
-<script>
-const WHATSAPP = "241066509602";
-const ADMIN_PASSWORD = "francky1234";
-
-const PRODUCTS = [
-"Pack Dessins Animés Anglais & Informatique",
-"Pack Dessins Animés Bibliques",
-"Pack Dessins Animés Coraniques",
-"Mega Pack Business & Entrepreneuriat",
-"Formation BTP & Architecture",
-"Coffres-forts Graphisme & Montage Vidéo",
-"Pack Logiciels Adobe & Office",
-"Ressources Développement Web (50Go)",
-"Coffres-forts Présentations & Infographies",
-"Formation Coiffure",
-"Formation Anglais Complète",
-"Formation Comptabilité",
-"Formation Bureautique",
-"Formation Agriculture & Élevage",
-"Formation Import-Export",
-"Formation E-commerce",
-"Formation Technicien Informatique",
-"Formation Montage Vidéo",
-"Formation CapCut Pro",
-"Formation Canva Pro",
-"Pack IA & Prompts",
-"Pack Applications Premium",
-"Pack IPTV & Streaming",
-"Pack Templates Business",
-"Pack Thèmes WordPress",
-"Pack Plugins WordPress",
-"Pack CV & Lettres Pro",
-"Pack Marketing Digital",
-"Pack Réseaux Sociaux",
-"Pack Création d’Entreprise",
-"Pack Coaching Personnel",
-"Pack Leadership",
-"Pack Développement Personnel"
+  // SUPER PACK
+  {id:30,title:'SUPER PACK GLOBAL',price:15000,desc:'Accès complet à tous les produits et packs.',badge:'OFFRE SPÉCIALE'}
 ];
+let selectedProduct=null;
 
-let currentProduct = "";
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-const productsDiv = document.getElementById("products");
-PRODUCTS.forEach(p=>{
-productsDiv.innerHTML+=`
-<div class="card">
-<h3>${p}</h3>
-<p class="price">2 500 FCFA</p>
-<button class="buy" onclick="order('${p}')">Acheter</button>
-</div>`;
-});
-
-function order(p){
-currentProduct=p;
-document.getElementById("form").classList.remove("hidden");
+function render(){
+  document.getElementById('products').innerHTML = products.map(p=>`
+    <div class="card">
+      <img src="images/default.jpg">
+      <div class="content">
+        <span class="badge">${p.badge}</span>
+        <h4>${p.title}</h4>
+        <p>${p.desc}</p>
+        <div class="price">${p.price.toLocaleString()} FCFA (~${(p.price/rate).toFixed(2)} €)</div>
+        <button class="btn" onclick="buy(${p.id})">Acheter</button>
+      </div>
+    </div>
+  `).join('');
 }
 
-function sendWhatsApp(){
-const name=document.getElementById("name").value;
-const email=document.getElementById("email").value;
-if(!name||!email)return alert("Veuillez remplir les champs");
-
-orders.push({name,email,product:currentProduct,date:new Date().toLocaleString(),status:"En attente"});
-localStorage.setItem("orders",JSON.stringify(orders));
-
-const msg=encodeURIComponent(
-`Bonjour, je souhaite acheter : ${currentProduct}
-Nom : ${name}
-Email : ${email}
-Prix : 2 500 FCFA`
-);
-window.open("https://wa.me/"+WHATSAPP+"?text="+msg,"_blank");
+function buy(id){
+  selectedProduct = products.find(p=>p.id===id);
+  document.getElementById('modal').style.display='flex';
 }
 
-function adminLogin(){
-const pass=prompt("Mot de passe admin");
-if(pass===ADMIN_PASSWORD){
-document.getElementById("admin").classList.remove("hidden");
-renderOrders();
-}else alert("Mot de passe incorrect");
+function confirmOrder(){
+  const email = document.getElementById('email').value;
+  if(!email.includes('@')){alert('Email invalide');return;}
+  const order = 'CMD-'+Date.now();
+  const msg = Bonjour, je souhaite finaliser la commande ${order} (%0AProduit: ${selectedProduct.title});
+  window.open(https://wa.me/241066509602?text=${msg},'_blank');
 }
 
-function renderOrders(){
-const o=document.getElementById("orders");o.innerHTML="";
-orders.forEach((x,i)=>{
-o.innerHTML+=`
-<div class="pending">
-<b>${x.product}</b><br>
-${x.name} - ${x.email}<br>
-${x.date} - ${x.status}
-<button class="confirm" onclick="confirm(${i})">Confirmer envoi</button>
-<button class="delete" onclick="remove(${i})">Supprimer</button>
-</div>`;
-});
-}
-
-function confirm(i){
-orders[i].status="Envoyé";
-localStorage.setItem("orders",JSON.stringify(orders));
-renderOrders();
-}
-
-function remove(i){
-orders.splice(i,1);
-localStorage.setItem("orders",JSON.stringify(orders));
-renderOrders();
-}
-</script>
-
-</body>
+render();
+</script></body>
 </html>
-
-
