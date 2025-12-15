@@ -6,78 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f4f6fb;
-}
-header{
-  background:#1e293b;
-  color:white;
-  padding:25px;
-}
-.container{
-  display:flex;
-  gap:20px;
-  padding:20px;
-}
-.about{
-  width:30%;
-  background:white;
-  padding:20px;
-  border-radius:10px;
-}
-.products{
-  width:70%;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:15px;
-}
-.card{
-  background:white;
-  padding:15px;
-  border-radius:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
-.card button{
-  width:100%;
-  padding:10px;
-  border:none;
-  background:#22c55e;
-  color:white;
-  border-radius:6px;
-  cursor:pointer;
-}
-.card button:hover{
-  background:#16a34a;
-}
-#formSection{
-  display:none;
-  background:white;
-  margin:20px;
-  padding:20px;
-  border-radius:10px;
-}
-input,select{
-  width:100%;
-  padding:10px;
-  margin-bottom:10px;
-}
-.whatsapp{
-  display:none;
-  background:#25D366;
-  color:white;
-  padding:12px;
-  text-align:center;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
-}
-footer{
-  text-align:center;
-  padding:20px;
-  color:#555;
-}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fb}
+header{background:#1e293b;color:white;padding:25px}
+.container{display:flex;gap:20px;padding:20px}
+.about{width:30%;background:white;padding:20px;border-radius:10px}
+.products{width:70%;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px}
+.card{background:white;padding:15px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.card h3{font-size:16px;margin-bottom:5px}
+.card p.desc{font-size:13px;color:#555;margin-bottom:10px}
+.card button{width:100%;padding:10px;border:none;background:#22c55e;color:white;border-radius:6px;cursor:pointer}
+.card button:hover{background:#16a34a}
+#formSection{display:none;background:white;margin:20px;padding:20px;border-radius:10px}
+input{width:100%;padding:10px;margin-bottom:10px}
+.whatsapp{display:none;background:#25D366;color:white;padding:12px;text-align:center;border-radius:8px;text-decoration:none;font-weight:bold}
+footer{text-align:center;padding:20px;color:#555}
 </style>
 </head>
 
@@ -92,10 +34,10 @@ footer{
   <div class="about">
     <h2>À propos</h2>
     <p>
-      Emmanuel Digital Store propose des produits numériques,
-      formations professionnelles et packs complets à prix accessibles.
+      Boutique spécialisée dans les <strong>produits numériques premium</strong>,
+      formations professionnelles et packs digitaux prêts à l’emploi.
     </p>
-    <p><strong>Paiement via WhatsApp après commande.</strong></p>
+    <p><strong>Commande en ligne – Paiement via WhatsApp</strong></p>
   </div>
 
   <div class="products" id="products"></div>
@@ -103,92 +45,98 @@ footer{
 
 <div id="formSection">
   <h2>Finaliser la commande</h2>
-
   <form onsubmit="submitOrder(event)">
     <input type="text" id="name" placeholder="Nom et prénom" required>
     <input type="email" id="email" placeholder="Adresse email" required>
     <input type="tel" id="phone" placeholder="Numéro WhatsApp" required>
     <input type="text" id="country" placeholder="Pays de résidence" required>
-
     <button type="submit">Valider</button>
   </form>
-
   <br>
-  <a id="whatsappLink" class="whatsapp" target="_blank">
-    Finaliser sur WhatsApp
-  </a>
+  <a id="whatsappLink" class="whatsapp" target="_blank">Finaliser sur WhatsApp</a>
 </div>
 
-<footer>
-  © 2025 Emmanuel Digital Store
-</footer>
+<footer>© 2025 Emmanuel Digital Store</footer>
 
 <script>
-// ================= PRODUITS (33) =================
-var products = [];
-for (var i = 1; i <= 29; i++) {
-  products.push({
-    name: "Produit Digital " + i,
-    price_fcfa: 2500,
-    price_eur: 3.8
-  });
-}
+// ================= PRODUITS AVEC DESCRIPTIONS =================
+var products = [
+  {name:"📘 Ebook Business & Entrepreneuriat",desc:"Guide pratique pour lancer et structurer un business rentable.",price_fcfa:2500,price_eur:3.8},
+  {name:"🎓 Formation Anglais Débutant à Avancé",desc:"Apprenez l’anglais pas à pas avec cours et exercices.",price_fcfa:2500,price_eur:3.8},
+  {name:"💻 Formation Informatique de Base",desc:"Maîtrisez l’ordinateur, Windows, Internet et outils essentiels.",price_fcfa:2500,price_eur:3.8},
+  {name:"📊 Formation Comptabilité Simplifiée",desc:"Comprendre la gestion financière sans difficulté.",price_fcfa:2500,price_eur:3.8},
+  {name:"📱 Formation Marketing Digital",desc:"Vendre efficacement sur les réseaux sociaux.",price_fcfa:2500,price_eur:3.8},
+  {name:"🎨 Formation Graphisme & Design",desc:"Créer des visuels professionnels facilement.",price_fcfa:2500,price_eur:3.8},
+  {name:"🎬 Formation Montage Vidéo",desc:"Montez des vidéos attractives pour le web.",price_fcfa:2500,price_eur:3.8},
+  {name:"🧠 Formation Intelligence Artificielle",desc:"Découvrir et utiliser l’IA dans vos projets.",price_fcfa:2500,price_eur:3.8},
+  {name:"🌍 Formation Import-Export",desc:"Comprendre les bases du commerce international.",price_fcfa:2500,price_eur:3.8},
+  {name:"💼 Formation Gestion de Projet",desc:"Planifier et réussir vos projets professionnels.",price_fcfa:2500,price_eur:3.8},
+  {name:"📈 Formation Vente & Closing",desc:"Techniques pour convaincre et vendre plus.",price_fcfa:2500,price_eur:3.8},
+  {name:"🗣️ Formation Prise de Parole",desc:"Parler avec assurance en public.",price_fcfa:2500,price_eur:3.8},
+  {name:"🛒 Formation E-commerce",desc:"Créer et gérer une boutique en ligne.",price_fcfa:2500,price_eur:3.8},
+  {name:"📐 Formation BTP & Architecture",desc:"Notions clés du bâtiment et de la construction.",price_fcfa:2500,price_eur:3.8},
+  {name:"💇 Formation Coiffure Professionnelle",desc:"Techniques modernes de coiffure.",price_fcfa:2500,price_eur:3.8},
+  {name:"🌾 Formation Agriculture Moderne",desc:"Méthodes agricoles rentables.",price_fcfa:2500,price_eur:3.8},
+  {name:"🐓 Formation Élevage",desc:"Bases de l’élevage rentable.",price_fcfa:2500,price_eur:3.8},
+  {name:"🖥️ Ressources Développement Web",desc:"Outils et fichiers pour créer des sites web.",price_fcfa:2500,price_eur:3.8},
+  {name:"📂 Coffre-fort Templates Business",desc:"Documents prêts à l’emploi.",price_fcfa:2500,price_eur:3.8},
+  {name:"📑 Modèles CV & Lettres Pro",desc:"CV et lettres modernes pour l’emploi.",price_fcfa:2500,price_eur:3.8},
+  {name:"🎞️ Ressources Création Contenu",desc:"Idéal pour créateurs de contenu.",price_fcfa:2500,price_eur:3.8},
+  {name:"📊 Templates Présentations Pro",desc:"Slides PowerPoint professionnels.",price_fcfa:2500,price_eur:3.8},
+  {name:"🤖 Prompts IA Professionnels",desc:"Commandes prêtes pour l’IA.",price_fcfa:2500,price_eur:3.8},
+  {name:"📦 Outils Productivité Digitale",desc:"Gagnez du temps et soyez efficace.",price_fcfa:2500,price_eur:3.8},
+  {name:"🎧 Livres Audio Motivation",desc:"Développement personnel audio.",price_fcfa:2500,price_eur:3.8},
+  {name:"📚 Bibliothèque Formations PDF",desc:"Collection complète de formations.",price_fcfa:2500,price_eur:3.8},
+  {name:"🧰 Logiciels Utiles & Outils",desc:"Logiciels essentiels pour le travail.",price_fcfa:2500,price_eur:3.8},
+  {name:"🔥 Pack Démarrage Business",desc:"Tout pour bien commencer.",price_fcfa:2500,price_eur:3.8},
+  {name:"📘 Pack Apprentissage Digital",desc:"Apprendre vite et efficacement.",price_fcfa:2500,price_eur:3.8},
 
-products.push(
-  { name:"Mini Pack Formations", price_fcfa:5000, price_eur:7.6 },
-  { name:"Mini Pack Business", price_fcfa:5000, price_eur:7.6 },
-  { name:"Mini Pack Logiciels", price_fcfa:5000, price_eur:7.6 },
-  { name:"SUPER PACK GLOBAL", price_fcfa:15000, price_eur:22.9 }
-);
+  {name:"🎓 MINI PACK FORMATIONS",desc:"Plusieurs formations réunies.",price_fcfa:5000,price_eur:7.6},
+  {name:"💼 MINI PACK BUSINESS",desc:"Ressources business essentielles.",price_fcfa:5000,price_eur:7.6},
+  {name:"💻 MINI PACK LOGICIELS",desc:"Logiciels et outils premium.",price_fcfa:5000,price_eur:7.6},
+  {name:"🔥 SUPER PACK GLOBAL",desc:"Accès total à tous les produits.",price_fcfa:15000,price_eur:22.9}
+];
 
 // ================= AFFICHAGE =================
-var container = document.getElementById("products");
-var selectedProduct = "";
+var container=document.getElementById("products");
+var selectedProduct="";
 
-for (var i = 0; i < products.length; i++) {
-  (function(p){
-    var card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML =
-      "<h3>"+p.name+"</h3>" +
-      "<p><strong>"+p.price_fcfa+" FCFA</strong> (~"+p.price_eur+" €)</p>" +
-      "<button>Acheter</button>";
+for(var i=0;i<products.length;i++){
+ (function(p){
+  var card=document.createElement("div");
+  card.className="card";
+  card.innerHTML=
+   "<h3>"+p.name+"</h3>"+
+   "<p class='desc'>"+p.desc+"</p>"+
+   "<p><strong>"+p.price_fcfa+" FCFA</strong> (~"+p.price_eur+" €)</p>"+
+   "<button>Acheter</button>";
 
-    card.querySelector("button").onclick = function(){
-      selectedProduct = p.name;
-      document.getElementById("formSection").style.display = "block";
-      window.scrollTo(0, document.body.scrollHeight);
-    };
-
-    container.appendChild(card);
-  })(products[i]);
+  card.querySelector("button").onclick=function(){
+    selectedProduct=p.name;
+    document.getElementById("formSection").style.display="block";
+    window.scrollTo(0,document.body.scrollHeight);
+  };
+  container.appendChild(card);
+ })(products[i]);
 }
 
 // ================= FORMULAIRE =================
 function submitOrder(e){
-  e.preventDefault();
+ e.preventDefault();
+ var name=document.getElementById("name").value;
+ var email=document.getElementById("email").value;
+ var country=document.getElementById("country").value;
+ var orderId="CMD-"+Math.floor(Math.random()*100000);
 
-  var name = document.getElementById("name").value;
-  var email = document.getElementById("email").value;
-  var phone = document.getElementById("phone").value;
-  var country = document.getElementById("country").value;
+ var msg="Bonjour Emmanuel,%0ACommande : "+selectedProduct+
+ "%0ANom : "+name+
+ "%0AEmail : "+email+
+ "%0APays : "+country+
+ "%0ARef : "+orderId;
 
-  var orderId = "CMD-" + Math.floor(Math.random()*100000);
-
-  var message =
-    "Bonjour Emmanuel,%0A%0A" +
-    "Je souhaite finaliser ma commande.%0A%0A" +
-    "Produit : " + selectedProduct + "%0A" +
-    "Nom : " + name + "%0A" +
-    "Email : " + email + "%0A" +
-    "Pays : " + country + "%0A" +
-    "Commande : " + orderId;
-
-  var link = "https://wa.me/241066509602?text=" + message;
-
-  var wa = document.getElementById("whatsappLink");
-  wa.href = link;
-  wa.style.display = "block";
+ var wa=document.getElementById("whatsappLink");
+ wa.href="https://wa.me/241066509602?text="+msg;
+ wa.style.display="block";
 }
 </script>
 
