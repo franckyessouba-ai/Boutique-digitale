@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,10 +22,16 @@
     input{padding:8px;width:100%;margin-bottom:10px;border-radius:6px;border:1px solid #ccc}
   </style>
 </head>
-<body><header>
+<body>
+
+<header>
   <h1>Admin — Emmanuel Digital Store</h1>
   <p>Zone privée (non liée au site public)</p>
-</header><div class="container">  <div class="card">
+</header>
+
+<div class="container">
+
+  <div class="card">
     <h2>📦 Commandes en attente</h2>
     <table>
       <thead>
@@ -38,13 +45,17 @@
       </thead>
       <tbody id="orders"></tbody>
     </table>
-  </div>  <div class="card">
+  </div>
+
+  <div class="card">
     <h2>➕ Ajouter un produit</h2>
     <input id="ptitle" placeholder="Titre du produit">
     <input id="pprice" placeholder="Prix FCFA">
     <input id="pdesc" placeholder="Description">
     <button class="btn confirm" onclick="addProduct()">Ajouter</button>
-  </div>  <div class="card">
+  </div>
+
+  <div class="card">
     <h2>🛒 Produits existants</h2>
     <table>
       <thead>
@@ -52,7 +63,11 @@
       </thead>
       <tbody id="products"></tbody>
     </table>
-  </div></div><script>
+  </div>
+
+</div>
+
+<script>
 // COMMANDES
 let orders = JSON.parse(localStorage.getItem('orders')||'[]');
 
@@ -68,42 +83,25 @@ function renderOrders(){
   `).join('');
 }
 
-function confirmOrder(i){
-  orders[i].status='Confirmée';
-  localStorage.setItem('orders',JSON.stringify(orders));
-  renderOrders();
-}
-
-// PRODUITS
-let products = JSON.parse(localStorage.getItem('products')||'[]');
-
-function renderProducts(){
-  document.getElementById('products').innerHTML = products.map((p,i)=>`
-    <tr>
-      <td>${p.title}</td>
-      <td>${p.price} FCFA</td>
-      <td><button class='btn delete' onclick='deleteProduct(${i})'>Supprimer</button></td>
-    </tr>
-  `).join('');
-}
-
-function addProduct(){
-  const title=document.getElementById('ptitle').value;
-  const price=document.getElementById('pprice').value;
-  const desc=document.getElementById('pdesc').value;
-  if(!title||!price) return alert('Champs manquants');
-  products.push({title,price,desc});
-  localStorage.setItem('products',JSON.stringify(products));
-  renderProducts();
-}
-
-function deleteProduct(i){
-  products.splice(i,1);
-  localStorage.setItem('products',JSON.stringify(products));
-  renderProducts();
+function confirmOrder(){
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const country = document.getElementById('country').value;
+  if(!email.includes('@')){alert('Email invalide');return;}
+  const orderId = 'CMD-' + Date.now();
+  const order = { id: orderId, product: selectedProduct.title, name, email, phone, country, status:'En attente' };
+  let orders = JSON.parse(localStorage.getItem('orders')||'[]');
+  orders.push(order);
+  localStorage.setItem('orders', JSON.stringify(orders));
+  const msg = `Bonjour, je souhaite finaliser la commande ${orderId}
+Produit : ${selectedProduct.title}`;
+  window.open(https://wa.me/241066509602?text=${encodeURIComponent(msg)},'_blank');
 }
 
 renderOrders();
 renderProducts();
-</script></body>
+</script>
+
+</body>
 </html>
