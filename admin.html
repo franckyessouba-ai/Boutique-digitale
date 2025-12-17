@@ -1,106 +1,256 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin — Emmanuel Digital Store</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    *{box-sizing:border-box;font-family:'Poppins',sans-serif}
-    body{margin:0;background:#f4f6fb;color:#1f2937}
-    header{background:#111827;color:#fff;padding:25px}
-    header h1{margin:0;font-size:24px}
-    .container{padding:30px}
-    .card{background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
-    h2{margin-top:0}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left}
-    th{background:#f9fafb}
-    .btn{padding:6px 12px;border:none;border-radius:6px;cursor:pointer;font-weight:600}
-    .confirm{background:#16a34a;color:#fff}
-    .delete{background:#dc2626;color:#fff}
-    input{padding:8px;width:100%;margin-bottom:10px;border-radius:6px;border:1px solid #ccc}
-  </style>
+<meta charset="UTF-8">
+<title>Admin | Emmanuel Digital Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0f172a;
+  color:#e5e7eb;
+}
+header{
+  background:linear-gradient(135deg,#1e40af,#7c3aed);
+  padding:25px;
+}
+header h1{margin:0}
+.container{
+  padding:20px;
+  max-width:1200px;
+  margin:auto;
+}
+.card{
+  background:#020617;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+h2{margin-top:0}
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:6px;
+  border:none;
+}
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.add{background:#22c55e;color:#022c22}
+.edit{background:#38bdf8;color:#082f49}
+.del{background:#ef4444;color:white}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  padding:10px;
+  border-bottom:1px solid #334155;
+}
+th{text-align:left;color:#93c5fd}
+small{color:#94a3b8}
+</style>
 </head>
+
 <body>
 
 <header>
-  <h1>Admin — Emmanuel Digital Store</h1>
-  <p>Zone privée (non liée au site public)</p>
+  <h1>🛠️ Admin — Emmanuel Digital Store</h1>
+  <p>Gestion des produits & commandes</p>
 </header>
 
 <div class="container">
 
-  <div class="card">
-    <h2>📦 Commandes en attente</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Commande</th>
-          <th>Produit</th>
-          <th>Client</th>
-          <th>Statut</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="orders"></tbody>
-    </table>
-  </div>
+<!-- AJOUT PRODUIT -->
+<div class="card">
+  <h2>➕ Ajouter un produit</h2>
+  <input id="title" placeholder="Nom du produit">
+  <textarea id="desc" placeholder="Description du produit"></textarea>
+  <input id="price" placeholder="Prix (2500 / 5000 / 15000)">
+  <input id="image" placeholder="Lien image (GitHub)">
+  <button class="add" onclick="addProduct()">Ajouter le produit</button>
+</div>
 
-  <div class="card">
-    <h2>➕ Ajouter un produit</h2>
-    <input id="ptitle" placeholder="Titre du produit">
-    <input id="pprice" placeholder="Prix FCFA">
-    <input id="pdesc" placeholder="Description">
-    <button class="btn confirm" onclick="addProduct()">Ajouter</button>
-  </div>
+<!-- PRODUITS -->
+<div class="card">
+  <h2>📦 Produits enregistrés</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Produit</th>
+        <th>Prix</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="products"></tbody>
+  </table>
+</div>
 
-  <div class="card">
-    <h2>🛒 Produits existants</h2>
-    <table>
-      <thead>
-        <tr><th>Produit</th><th>Prix</th><th>Action</th></tr>
-      </thead>
-      <tbody id="products"></tbody>
-    </table>
-  </div>
+<!-- COMMANDES -->
+<div class="card">
+  <h2>🧾 Commandes clients</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Référence</th>
+        <th>Produit</th>
+        <th>Client</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="orders"></tbody>
+  </table>
+</div>
 
 </div>
 
 <script>
-// COMMANDES
-let orders = JSON.parse(localStorage.getItem('orders')||'[]');
+let products = JSON.parse(localStorage.getItem("products")||"[]");
+let orders = JSON.parse(localStorage.getItem("orders")||"[]");
+let editIndex = null;
 
-function renderOrders(){
-  document.getElementById('orders').innerHTML = orders.map((o,i)=>`
+// RENDER PRODUITS
+function renderProducts(){
+  const tbody = document.getElementById("products");
+  tbody.innerHTML = "";
+  products.forEach((p,i)=>{
+    tbody.innerHTML += `
     <tr>
-      <td>${o.id}</td>
+      <td>📘 ${p.title}<br><small>${p.desc}</small></td>
+      <td>${p.price} FCFA</td>
+      <td>
+        <button class="edit" onclick="editProduct(${i})">✏️</button>
+        <button class="del" onclick="deleteProduct(${i})">🗑️</button>
+      </td>
+    </tr>`;
+  });
+}
+
+// AJOUT / MODIF
+function addProduct(){
+  const title = document.getElementById("title").value;
+  const desc = document.getElementById("desc").value;
+  const price = document.getElementById("price").value;
+  const image = document.getElementById("image").value || "images/par défaut.jpg";
+
+  if(!title || !price){alert("Champs manquants");return;}
+
+  const product = {title,desc,price,image};
+
+  if(editIndex !== null){
+    products[editIndex] = product;
+    editIndex = null;
+  } else {
+    products.push(product);
+  }
+
+  localStorage.setItem("products", JSON.stringify(products));
+  document.querySelectorAll("input,textarea").forEach(e=>e.value="");
+  renderProducts();
+}
+
+// MODIFIER
+function editProduct(i){
+  const p = products[i];
+  document.getElementById("title").value = p.title;
+  document.getElementById("desc").value = p.desc;
+  document.getElementById("price").value = p.price;
+  document.getElementById("image").value = p.image;
+  editIndex = i;
+}
+
+// SUPPRIMER
+function deleteProduct(i){
+  if(confirm("Supprimer ce produit ?")){
+    products.splice(i,1);
+    localStorage.setItem("products", JSON.stringify(products));
+    renderProducts();
+  }
+}
+
+// COMMANDES
+function renderOrders(){
+  const tbody = document.getElementById("orders");
+  tbody.innerHTML="";
+  orders.forEach(o=>{
+    tbody.innerHTML+=`
+    <tr>
+      <td>${o.ref}</td>
       <td>${o.product}</td>
       <td>${o.name}</td>
-      <td>${o.status}</td>
-      <td>${o.status==='En attente' ? <button class='btn confirm' onclick='confirmOrder(${i})'>Confirmer</button>:''}</td>
-    </tr>
-  `).join('');
+      <td>${o.email}</td>
+    </tr>`;
+  });
 }
 
-function confirmOrder(){
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
-  const country = document.getElementById('country').value;
-  if(!email.includes('@')){alert('Email invalide');return;}
-  const orderId = 'CMD-' + Date.now();
-  const order = { id: orderId, product: selectedProduct.title, name, email, phone, country, status:'En attente' };
-  let orders = JSON.parse(localStorage.getItem('orders')||'[]');
-  orders.push(order);
-  localStorage.setItem('orders', JSON.stringify(orders));
-  const msg = `Bonjour, je souhaite finaliser la commande ${orderId}
-Produit : ${selectedProduct.title}`;
-  window.open(https://wa.me/241066509602?text=${encodeURIComponent(msg)},'_blank');
-}
+  <script>
+// ===== PRÉCHARGEMENT DES PRODUITS =====
+if(!localStorage.getItem("products")){
+  const defaultProducts = [
 
-renderOrders();
+    // 🎓 FORMATIONS (15)
+    {title:"🎓 Anglais complet", desc:"Formation complète pour parler et comprendre l’anglais.", price:2500, image:"images/formations.jpg"},
+    {title:"💻 Informatique de base", desc:"Maîtriser l’ordinateur, Windows et Internet.", price:2500, image:"images/formations.jpg"},
+    {title:"📈 Marketing digital", desc:"Stratégies pour vendre et se promouvoir en ligne.", price:2500, image:"images/formations.jpg"},
+    {title:"🎨 Graphisme", desc:"Création de visuels professionnels (logos, flyers).", price:2500, image:"images/formations.jpg"},
+    {title:"🎬 Montage vidéo", desc:"Montage vidéo pour réseaux sociaux et YouTube.", price:2500, image:"images/formations.jpg"},
+    {title:"🤖 IA pratique", desc:"Utiliser l’intelligence artificielle au quotidien.", price:2500, image:"images/formations.jpg"},
+    {title:"🚢 Import-Export", desc:"Comprendre le commerce international.", price:2500, image:"images/formations.jpg"},
+    {title:"📊 Gestion de projet", desc:"Organisation et pilotage de projets.", price:2500, image:"images/formations.jpg"},
+    {title:"💼 Vente & closing", desc:"Techniques de persuasion et de vente.", price:2500, image:"images/formations.jpg"},
+    {title:"🎤 Prise de parole", desc:"S’exprimer avec assurance en public.", price:2500, image:"images/formations.jpg"},
+    {title:"🛒 E-commerce", desc:"Créer et gérer une boutique en ligne.", price:2500, image:"images/formations.jpg"},
+    {title:"🏗️ BTP & Architecture", desc:"Bases essentielles du bâtiment.", price:2500, image:"images/formations.jpg"},
+    {title:"💇 Coiffure", desc:"Techniques professionnelles de coiffure.", price:2500, image:"images/formations.jpg"},
+    {title:"🌱 Agriculture", desc:"Agriculture moderne et rentable.", price:2500, image:"images/formations.jpg"},
+    {title:"🐄 Élevage", desc:"Bases de l’élevage animal.", price:2500, image:"images/formations.jpg"},
+
+    // 💼 BUSINESS (7)
+    {title:"📘 Ebook business", desc:"Stratégies pour entreprendre et réussir.", price:2500, image:"images/business.jpg"},
+    {title:"📂 Templates business", desc:"Documents professionnels prêts à l’emploi.", price:2500, image:"images/business.jpg"},
+    {title:"📄 CV professionnels", desc:"CV modernes pour décrocher un emploi.", price:2500, image:"images/business.jpg"},
+    {title:"📊 Présentations pro", desc:"Présentations PowerPoint professionnelles.", price:2500, image:"images/business.jpg"},
+    {title:"⏱️ Productivité", desc:"Méthodes pour mieux gérer son temps.", price:2500, image:"images/business.jpg"},
+    {title:"🎧 Audio motivation", desc:"Audios pour rester motivé et discipliné.", price:2500, image:"images/business.jpg"},
+    {title:"📦 Mini Pack Business", desc:"Regroupement d’outils business essentiels.", price:5000, image:"images/packs.jpg"},
+
+    // 🌐 DIGITAL (5)
+    {title:"🌐 Développement web", desc:"Créer des sites web modernes.", price:2500, image:"images/digital.jpg"},
+    {title:"🎥 Création de contenu", desc:"Créer du contenu engageant.", price:2500, image:"images/digital.jpg"},
+    {title:"🤖 Prompts IA", desc:"Prompts efficaces pour l’IA.", price:2500, image:"images/digital.jpg"},
+    {title:"💾 Logiciels utiles", desc:"Logiciels indispensables au quotidien.", price:2500, image:"images/digital.jpg"},
+    {title:"📚 Bibliothèque PDF", desc:"Collection de ressources PDF.", price:2500, image:"images/digital.jpg"},
+
+    // 📦 PACKS (4)
+    {title:"📦 Mini Pack Formations", desc:"Plusieurs formations réunies.", price:5000, image:"images/packs.jpg"},
+    {title:"📦 Mini Pack Digital", desc:"Outils digitaux essentiels.", price:5000, image:"images/packs.jpg"},
+    {title:"🔥 Super Pack Global", desc:"Tous les produits réunis.", price:15000, image:"images/packs.jpg"},
+    {title:"👑 Super Pack Premium", desc:"Pack ultime tout inclus.", price:15000, image:"images/packs.jpg"},
+
+    // 🔐 CYBERSÉCURITÉ (7)
+    {title:"🔐 Cybersécurité Débutant → Expert (Partie 1)", desc:"Bases solides de la cybersécurité.", price:2500, image:"images/cyber.jpg"},
+    {title:"🔐 Cybersécurité Débutant → Expert (Partie 2)", desc:"Techniques avancées de sécurité.", price:2500, image:"images/cyber.jpg"},
+    {title:"👨‍💻 Hacker éthique", desc:"Apprendre le hacking légal.", price:2500, image:"images/cyber.jpg"},
+    {title:"🐧 Kali Linux", desc:"Outils de pentesting.", price:2500, image:"images/cyber.jpg"},
+    {title:"📶 WiFi Hacking", desc:"Sécurisation et tests WiFi.", price:2500, image:"images/cyber.jpg"},
+    {title:"🌐 Dark Web", desc:"Comprendre le Dark Web.", price:2500, image:"images/cyber.jpg"},
+    {title:"🔥 Super Pack Cybersécurité", desc:"Toutes les formations cybersécurité.", price:15000, image:"images/cyber.jpg"}
+  ];
+
+  localStorage.setItem("products", JSON.stringify(defaultProducts));
+}
+</script>
+  
 renderProducts();
+renderOrders();
 </script>
 
 </body>
