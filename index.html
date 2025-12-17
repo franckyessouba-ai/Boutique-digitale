@@ -6,226 +6,236 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#0f172a}
-header{background:linear-gradient(135deg,#0f172a,#1e40af);color:#fff;padding:35px}
-header h1{margin:0}
-.container{display:flex;gap:20px;padding:20px}
-.left{width:35%;background:#fff;padding:20px;border-radius:14px}
+body{
+  margin:0;
+  font-family:Poppins,Arial,sans-serif;
+  background:#eef2ff;
+  color:#1e293b;
+}
+header{
+  background:linear-gradient(135deg,#1e3a8a,#7c3aed);
+  color:white;
+  padding:35px;
+}
+.container{
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+.left{
+  width:35%;
+  background:white;
+  padding:20px;
+  border-radius:14px;
+}
+.left img{
+  width:100%;
+  border-radius:12px;
+  margin-bottom:15px;
+}
 .right{width:65%}
-.search input{width:100%;padding:12px;border-radius:10px;border:1px solid #cbd5e1;margin-bottom:15px}
-.shelf{margin-bottom:35px}
-.shelf-title{font-size:20px;color:#1e3a8a;margin-bottom:10px}
-.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px}
-.card{background:#fff;border-radius:12px;padding:15px;box-shadow:0 6px 18px rgba(0,0,0,.08);border-top:4px solid #38bdf8}
-.pack{border-top:4px solid #dc2626}
-.price{font-weight:bold;color:#dc2626}
-.card button{width:100%;padding:10px;background:#16a34a;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:bold}
-#formSection{display:none;background:#fff;margin:20px;padding:20px;border-radius:14px}
-input{width:100%;padding:10px;margin-bottom:10px;border-radius:8px;border:1px solid #cbd5e1}
-.whatsapp{display:none;background:#25D366;color:#fff;padding:12px;text-align:center;border-radius:10px;text-decoration:none;font-weight:bold}
-footer{text-align:center;padding:20px;color:#475569}
+
+.search input{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #c7d2fe;
+  margin-bottom:20px;
+}
+
+.category{
+  margin-bottom:35px;
+}
+.category h2{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#1e3a8a;
+}
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:15px;
+}
+.card{
+  background:white;
+  border-radius:14px;
+  padding:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+.card h4{margin:5px 0}
+.card p{font-size:13px;color:#475569}
+.card button{
+  width:100%;
+  padding:12px;
+  background:#22c55e;
+  border:none;
+  color:white;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+}
+.card button:hover{background:#16a34a}
+
+#orderForm{
+  display:none;
+  background:white;
+  padding:25px;
+  margin:20px;
+  border-radius:14px;
+}
+#orderForm input{
+  width:100%;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+.whatsapp{
+  display:none;
+  margin-top:15px;
+  background:#25D366;
+  color:white;
+  padding:14px;
+  text-align:center;
+  border-radius:10px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#475569;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>🚀 Emmanuel Digital Store</h1>
-<p>🎓 Formations • 🔐 Cybersécurité • 💼 Business • 📦 Packs</p>
+  <h1>🚀 Emmanuel Digital Store</h1>
+  <p>📚 Formations • 💼 Business • 🔐 Cybersécurité • 🌐 Digital</p>
 </header>
 
 <div class="container">
-<div class="left">
-<h2>👋 À propos</h2>
-<p>
-Je suis <strong>Emmanuel</strong>, jeune étudiant passionné par le digital et la cybersécurité.
-Après paiement, je vous envoie personnellement le fichier correspondant.
-</p>
 
-<h3>📌 Comment ça marche</h3>
-<p>
-1️⃣ Choisissez un produit<br>
-2️⃣ Remplissez le formulaire<br>
-3️⃣ Payez via WhatsApp<br>
-4️⃣ Réception du fichier
-</p>
+  <!-- GAUCHE -->
+  <div class="left">
+    <img src="images/boutique.jpg" alt="Emmanuel Digital Store">
+    <h2>👋 Qui suis-je ?</h2>
+    <p>
+      Je suis <strong>Emmanuel</strong>, jeune étudiant passionné par le digital,
+      l’apprentissage et l’entrepreneuriat.  
+      À travers cette boutique, je mets à disposition des ressources
+      utiles, accessibles et concrètes.
+    </p>
 
-  <h3>✅ Avantages</h3>
-<ul>
-<li>✔ Ressources utiles et pratiques</li>
-<li>✔ Prix accessibles</li>
-<li>✔ Support humain direct</li>
-<li>✔ Accès rapide après paiement</li>
-</ul>
+    <h3>📦 Comment ça marche ?</h3>
+    <ul>
+      <li>1️⃣ Choisis ton produit</li>
+      <li>2️⃣ Renseigne tes informations</li>
+      <li>3️⃣ Finalise sur WhatsApp</li>
+      <li>4️⃣ Réception rapide après confirmation</li>
+    </ul>
+
+    <h3>⭐ Avantages</h3>
+    <ul>
+      <li>✔ Prix accessibles</li>
+      <li>✔ Produits numériques instantanés</li>
+      <li>✔ Support humain</li>
+    </ul>
+  </div>
+
+  <!-- DROITE -->
+  <div class="right">
+    <div class="search">
+      <input type="text" id="search" placeholder="🔍 Rechercher un produit...">
+    </div>
+    <div id="catalog"></div>
+  </div>
+
 </div>
 
-<div class="right">
-<div class="search">
-<input id="search" placeholder="🔍 Rechercher un produit">
-</div>
-<div id="shelves"></div>
-</div>
-</div>
-
-<div id="formSection">
-<h2>🧾 Finaliser la commande</h2>
-<form onsubmit="submitOrder(event)">
-<input id="name" placeholder="Nom et prénom" required>
-<input id="email" type="email" placeholder="Email" required>
-<input id="phone" placeholder="WhatsApp" required>
-<input id="country" placeholder="Pays" required>
-<button type="submit">Valider</button>
-</form><br>
-<a id="whatsappLink" class="whatsapp" target="_blank">💬 Finaliser sur WhatsApp</a>
+<div id="orderForm">
+  <h2>🛒 Finaliser la commande</h2>
+  <form onsubmit="submitOrder(event)">
+    <input id="cname" placeholder="Nom et prénom" required>
+    <input id="cemail" type="email" placeholder="Email" required>
+    <input id="cphone" placeholder="Numéro WhatsApp" required>
+    <input id="ccountry" placeholder="Pays" required>
+    <button type="submit">Valider</button>
+  </form>
+  <a id="waLink" class="whatsapp" target="_blank">Finaliser sur WhatsApp</a>
 </div>
 
 <footer>© 2025 Emmanuel Digital Store</footer>
 
 <script>
-var selectedProduct="";
+let selectedProduct=null;
+const catalog=document.getElementById("catalog");
+const products=JSON.parse(localStorage.getItem("products"))||[];
 
-/* ================== PRODUITS → FICHIERS ================== */
-var files={
-// FORMATIONS
-"🎓 Anglais complet":"files/anglais-complet.pdf",
-"💻 Informatique de base":"files/informatique-base.pdf",
-"📈 Marketing digital":"files/marketing-digital.pdf",
-"🎨 Graphisme":"files/graphisme.pdf",
-"🎬 Montage vidéo":"files/montage-video.pdf",
-"🤖 IA pratique":"files/ia-pratique.pdf",
-"🚢 Import-Export":"files/import-export.pdf",
-"📊 Gestion de projet":"files/gestion-projet.pdf",
-"💼 Vente & closing":"files/vente-closing.pdf",
-"🎤 Prise de parole":"files/prise-parole.pdf",
-"🛒 E-commerce":"files/ecommerce.pdf",
-"🏗️ BTP & Architecture":"files/btp-architecture.pdf",
-"💇 Coiffure":"files/coiffure.pdf",
-"🌱 Agriculture":"files/agriculture.pdf",
-"🐄 Élevage":"files/elevage.pdf",
-
-// BUSINESS
-"📘 Ebook business":"files/ebook-business.pdf",
-"📂 Templates business":"files/templates-business.zip",
-"📄 CV professionnels":"files/cv-professionnels.zip",
-"📊 Présentations pro":"files/presentations-pro.zip",
-"⏱️ Productivité":"files/productivite.pdf",
-"🎧 Audio motivation":"files/audio-motivation.zip",
-"📦 Mini Pack Business":"files/mini-pack-business.zip",
-
-// DIGITAL
-"🌐 Développement web":"files/developpement-web.pdf",
-"🎥 Création de contenu":"files/creation-contenu.pdf",
-"🤖 Prompts IA":"files/prompts-ia.pdf",
-"💾 Logiciels utiles":"files/logiciels-utiles.zip",
-"📚 Bibliothèque PDF":"files/bibliotheque-pdf.zip",
-
-// PACKS
-"📦 Mini Pack Formations":"files/mini-pack-formations.zip",
-"📦 Mini Pack Digital":"files/mini-pack-digital.zip",
-"🔥 Super Pack Global":"files/super-pack-global.zip",
-"👑 Super Pack Premium":"files/super-pack-premium.zip",
-
-// CYBERSÉCURITÉ
-"🔐 Cybersécurité Débutant → Expert (Partie 1)":"files/cyber-part1.pdf",
-"🔐 Cybersécurité Débutant → Expert (Partie 2)":"files/cyber-part2.pdf",
-"👨‍💻 Guide Hacker Éthique":"files/guide-hacker-ethique.pdf",
-"📡 WiFi PME":"files/wifi-pme.pdf",
-"💻 Hacking éthique complet":"files/hacking-ethique.pdf",
-"🧨 Metasploit & Exploits":"files/metasploit.pdf",
-"🎭 Ingénierie sociale":"files/ingenierie-sociale.pdf",
-"📶 WiFi Hacking":"files/wifi-hacking.pdf",
-"🐧 Kali Linux":"files/kali-linux.pdf",
-"🌐 Dark Web":"files/dark-web.pdf",
-"🧱 Fondements cybersécurité":"files/fondements-cyber.pdf",
-"🔐 OpenSSL":"files/openssl.pdf",
-"🌍 SSL":"files/ssl.pdf",
-"🔥 Super Pack Cybersécurité":"files/super-pack-cyber.zip"
-};
-
-/* ================== CATÉGORIES ================== */
-var categories={
-"🎓 Formations":[
-"🎓 Anglais complet","💻 Informatique de base","📈 Marketing digital","🎨 Graphisme",
-"🎬 Montage vidéo","🤖 IA pratique","🚢 Import-Export","📊 Gestion de projet",
-"💼 Vente & closing","🎤 Prise de parole","🛒 E-commerce","🏗️ BTP & Architecture",
-"💇 Coiffure","🌱 Agriculture","🐄 Élevage"
-],
-"💼 Business":[
-"📘 Ebook business","📂 Templates business","📄 CV professionnels",
-"📊 Présentations pro","⏱️ Productivité","🎧 Audio motivation","📦 Mini Pack Business"
-],
-"🌐 Digital":[
-"🌐 Développement web","🎥 Création de contenu","🤖 Prompts IA",
-"💾 Logiciels utiles","📚 Bibliothèque PDF"
-],
-"📦 Packs":[
-"📦 Mini Pack Formations","📦 Mini Pack Digital",
-"🔥 Super Pack Global","👑 Super Pack Premium"
-],
-"🔐 Cybersécurité":[
-"🔐 Cybersécurité Débutant → Expert (Partie 1)",
-"🔐 Cybersécurité Débutant → Expert (Partie 2)",
-"👨‍💻 Guide Hacker Éthique","📡 WiFi PME",
-"💻 Hacking éthique complet","🧨 Metasploit & Exploits",
-"🎭 Ingénierie sociale","📶 WiFi Hacking",
-"🐧 Kali Linux","🌐 Dark Web",
-"🧱 Fondements cybersécurité","🔐 OpenSSL","🌍 SSL",
-"🔥 Super Pack Cybersécurité"
-]
-};
-
-/* ================== AFFICHAGE ================== */
-function render(filter){
-var shelves=document.getElementById("shelves");
-shelves.innerHTML="";
-for(var cat in categories){
-var html="<div class='shelf'><div class='shelf-title'>"+cat+"</div><div class='products'>";
-var items=categories[cat];
-for(var i=0;i<items.length;i++){
-var name=items[i];
-if(!filter||name.toLowerCase().includes(filter)){
-var price="2 500 FCFA (~3,80 €)";
-var isPack="";
-if(name.includes("Mini Pack")){
-  price="5 000 FCFA (~7,60 €)";
-  isPack="pack";
-}
-if(name.includes("Super Pack")){
-  price="15 000 FCFA (~23 €)";
-  isPack="pack";
-}
-html+="<div class='card "+isPack+"'><h4>"+name+"</h4><p class='price'>"+price+"</p><button onclick=\"buy('"+name+"')\">Acheter</button></div>";
-}
-}
-html+="</div></div>";
-shelves.innerHTML+=html;
-}
+// Regrouper par catégorie via image
+function groupProducts(){
+  const groups={};
+  products.forEach(p=>{
+    const key=p.image||"Autres";
+    if(!groups[key]) groups[key]=[];
+    groups[key].push(p);
+  });
+  return groups;
 }
 
-/* ================== COMMANDE ================== */
-function buy(name){
-selectedProduct=name;
-document.getElementById("formSection").style.display="block";
-window.scrollTo(0,document.body.scrollHeight);
+function render(filter=""){
+  catalog.innerHTML="";
+  const groups=groupProducts();
+
+  for(const img in groups){
+    let html=`<div class="category">
+      <h2>📦 ${img.includes("cyber")?"Cybersécurité":img.includes("business")?"Business":img.includes("digital")?"Digital":"Formations"}</h2>
+      <div class="products">`;
+
+    groups[img].forEach(p=>{
+      if(p.title.toLowerCase().includes(filter)){
+        html+=`
+        <div class="card">
+          <h4>${p.title}</h4>
+          <p>${p.desc}</p>
+          <p><strong>${p.price} FCFA</strong></p>
+          <button onclick='buy(${JSON.stringify(p)})'>Acheter</button>
+        </div>`;
+      }
+    });
+
+    html+=</div></div>;
+    catalog.innerHTML+=html;
+  }
+}
+
+function buy(p){
+  selectedProduct=p;
+  document.getElementById("orderForm").style.display="block";
+  window.scrollTo(0,document.body.scrollHeight);
 }
 
 function submitOrder(e){
-e.preventDefault();
-var ref="CMD-"+Math.floor(Math.random()*100000);
-var msg="Bonjour Emmanuel,%0AProduit : "+selectedProduct+
-"%0AFichier : "+files[selectedProduct]+
-"%0ARef : "+ref;
-var wa=document.getElementById("whatsappLink");
-wa.href="https://wa.me/241066509602?text="+msg;
-wa.style.display="block";
+  e.preventDefault();
+  const ref="CMD-"+Date.now();
+  const msg=`Bonjour Emmanuel 👋
+Commande : ${selectedProduct.title}
+Nom : ${cname.value}
+Email : ${cemail.value}
+Pays : ${ccountry.value}
+Référence : ${ref}`;
+  const wa=document.getElementById("waLink");
+  wa.href="https://wa.me/241066509602?text="+encodeURIComponent(msg);
+  wa.style.display="block";
 }
 
-search.onkeyup=function(){
-render(this.value.toLowerCase());
-};
-render("");
+search.onkeyup=()=>render(search.value.toLowerCase());
+render();
 </script>
 
 </body>
 </html>
-
