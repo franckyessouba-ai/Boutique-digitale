@@ -8,76 +8,88 @@
 <style>
 body{
   margin:0;
-  font-family:Poppins,Arial,sans-serif;
+  font-family:Arial, sans-serif;
   background:#eef2ff;
-  color:#1e293b;
+  color:#0f172a;
 }
 header{
-  background:linear-gradient(135deg,#1e3a8a,#7c3aed);
+  background:linear-gradient(135deg,#1e3a8a,#0f172a);
   color:white;
-  padding:35px;
-  text-align:center;
+  padding:40px 20px;
 }
+header h1{margin:0;font-size:32px}
+header p{margin-top:5px;color:#c7d2fe}
+
 .container{
   display:flex;
   gap:20px;
   padding:20px;
-  flex-wrap: wrap;
-}
-.left{
-  flex:1 1 300px;
-  background:white;
-  padding:20px;
-  border-radius:14px;
-}
-.left img{
-  width:100%;
-  border-radius:12px;
-  margin-bottom:15px;
-}
-.right{
-  flex:2 1 500px;
+  max-width:1400px;
+  margin:auto;
 }
 
-.search input{
-  width:100%;
-  padding:14px;
-  border-radius:10px;
-  border:1px solid #c7d2fe;
-  margin-bottom:20px;
+.left{
+  width:32%;
+  background:white;
+  padding:25px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
 }
+.left h2{margin-top:0}
+.badge{
+  background:#dc2626;
+  color:white;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:13px;
+  display:inline-block;
+  margin-bottom:10px;
+}
+
+.stat{
+  background:#f1f5f9;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:10px;
+  font-size:14px;
+}
+
+.right{width:68%}
 
 .category{
-  margin-bottom:35px;
+  margin-bottom:45px;
 }
 .category h2{
-  display:flex;
-  align-items:center;
-  gap:10px;
   color:#1e3a8a;
-  font-size:1.3rem;
+  border-left:5px solid #22c55e;
+  padding-left:10px;
 }
+
 .products{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:15px;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:16px;
 }
+
 .card{
   background:white;
-  border-radius:14px;
-  padding:15px;
+  border-radius:16px;
+  padding:16px;
   box-shadow:0 8px 20px rgba(0,0,0,.08);
+  display:flex;
+  flex-direction:column;
 }
-.card h4{margin:5px 0;font-size:1rem;}
-.card p{font-size:13px;color:#475569;margin:3px 0;}
+.card h4{margin:5px 0}
+.card p{font-size:13px;color:#475569;flex-grow:1}
+.price{font-weight:bold;margin:8px 0}
+
 .card button{
-  width:100%;
   padding:12px;
   background:#22c55e;
   border:none;
   color:white;
-  border-radius:8px;
-  font-weight:600;
+  border-radius:10px;
+  font-weight:700;
   cursor:pointer;
 }
 .card button:hover{background:#16a34a}
@@ -86,8 +98,9 @@ header{
   display:none;
   background:white;
   padding:25px;
-  margin:20px;
-  border-radius:14px;
+  margin:20px auto;
+  max-width:600px;
+  border-radius:16px;
 }
 #orderForm input{
   width:100%;
@@ -98,13 +111,12 @@ header{
 }
 .whatsapp{
   display:none;
-  margin-top:15px;
   background:#25D366;
   color:white;
   padding:14px;
   text-align:center;
-  border-radius:10px;
-  font-weight:700;
+  border-radius:12px;
+  font-weight:800;
   text-decoration:none;
 }
 
@@ -113,25 +125,6 @@ footer{
   padding:25px;
   color:#475569;
 }
-
-@media(max-width:900px){
-  .container{
-    flex-direction:column;
-    padding:15px;
-  }
-  .left, .right{
-    flex:1 1 100%;
-  }
-  .products{
-    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  }
-}
-@media(max-width:500px){
-  .card h4{font-size:0.95rem;}
-  .card p{font-size:12px;}
-  .card button{padding:10px;}
-  .category h2{font-size:1.1rem;}
-}
 </style>
 </head>
 
@@ -139,183 +132,108 @@ footer{
 
 <header>
   <h1>🚀 Emmanuel Digital Store</h1>
-  <p>📚 Formations • 💼 Business • 🔐 Cybersécurité • 🌐 Digital • 📦 Packs</p>
+  <p>📚 Formations • 💼 Business • 🔐 Cybersécurité • 🌐 Digital</p>
 </header>
 
 <div class="container">
 
-  <div class="left">
-    <img src="images/boutique.jpg" alt="Emmanuel Digital Store">
-    <h2>👋 Qui suis-je ?</h2>
-    <p>
-      Je suis <strong>Emmanuel</strong>, jeune étudiant passionné par le digital,
-      l’apprentissage et l’entrepreneuriat.  
-      À travers cette boutique, je mets à disposition des ressources
-      utiles, accessibles et concrètes.
-    </p>
+<!-- GAUCHE : CONFIANCE -->
+<div class="left">
+  <span class="badge">🔥 Boutique digitale</span>
+  <h2>👋 À propos</h2>
+  <p>
+    Je m’appelle <strong>Emmanuel</strong>, jeune étudiant passionné par le digital
+    et l’apprentissage.  
+    Cette boutique a pour but de rendre la connaissance et les outils numériques
+    accessibles à tous.
+  </p>
 
-    <h3>📦 Comment ça marche ?</h3>
-    <ul>
-      <li>1️⃣ Choisis ton produit</li>
-      <li>2️⃣ Renseigne tes informations</li>
-      <li>3️⃣ Finalise sur WhatsApp</li>
-      <li>4️⃣ Réception rapide après confirmation</li>
-    </ul>
+  <h3>📦 Activité récente</h3>
+  <div class="stat">✅ +150 clients servis</div>
+  <div class="stat">🕒 Dernière commande : Pack Cybersécurité</div>
+  <div class="stat">⭐ Satisfaction élevée</div>
 
-    <h3>⭐ Avantages</h3>
-    <ul>
-      <li>✔ Prix accessibles</li>
-      <li>✔ Produits numériques instantanés</li>
-      <li>✔ Support humain</li>
-    </ul>
-  </div>
-
-  <div class="right">
-    <div class="search">
-      <input type="text" id="search" placeholder="🔍 Rechercher un produit...">
-    </div>
-    <div id="catalog"></div>
-  </div>
-
+  <h3>💡 Pourquoi acheter ici ?</h3>
+  <ul>
+    <li>✔ Produits utiles et pratiques</li>
+    <li>✔ Prix abordables</li>
+    <li>✔ Support direct sur WhatsApp</li>
+    <li>✔ Livraison rapide après paiement</li>
+  </ul>
 </div>
 
+<!-- DROITE : PRODUITS -->
+<div class="right">
+
+<!-- FORMATIONS -->
+<div class="category">
+<h2>🎓 Formations</h2>
+<div class="products">
+<div class="card"><h4>🎓 Anglais complet</h4><p>Apprenez à parler, comprendre et écrire l’anglais pour le travail et le business.</p><div class="price">2 500 FCFA</div><button onclick="buy('Anglais complet')">Acheter</button></div>
+<div class="card"><h4>💻 Informatique de base</h4><p>Maîtrisez l’ordinateur, Windows, Internet et les bases numériques.</p><div class="price">2 500 FCFA</div><button onclick="buy('Informatique de base')">Acheter</button></div>
+<div class="card"><h4>📈 Marketing digital</h4><p>Apprenez à vendre, faire de la publicité et attirer des clients en ligne.</p><div class="price">2 500 FCFA</div><button onclick="buy('Marketing digital')">Acheter</button></div>
+<div class="card"><h4>🎨 Graphisme</h4><p>Créez des logos, flyers et visuels professionnels.</p><div class="price">2 500 FCFA</div><button onclick="buy('Graphisme')">Acheter</button></div>
+<div class="card"><h4>🎬 Montage vidéo</h4><p>Réalisez des vidéos attractives pour réseaux sociaux.</p><div class="price">2 500 FCFA</div><button onclick="buy('Montage vidéo')">Acheter</button></div>
+</div>
+</div>
+
+<!-- BUSINESS -->
+<div class="category">
+<h2>💼 Business & Outils</h2>
+<div class="products">
+<div class="card"><h4>📘 Ebook business</h4><p>Stratégies pratiques pour lancer et développer un business.</p><div class="price">2 500 FCFA</div><button onclick="buy('Ebook business')">Acheter</button></div>
+<div class="card"><h4>📂 Templates business</h4><p>Documents professionnels prêts à l’emploi.</p><div class="price">2 500 FCFA</div><button onclick="buy('Templates business')">Acheter</button></div>
+<div class="card"><h4>📦 Mini Pack Business</h4><p>Un regroupement d’outils essentiels pour entrepreneurs.</p><div class="price">5 000 FCFA</div><button onclick="buy('Mini Pack Business')">Acheter</button></div>
+</div>
+</div>
+
+<!-- CYBERSÉCURITÉ -->
+<div class="category">
+<h2>🔐 Cybersécurité & Hacking</h2>
+<div class="products">
+<div class="card"><h4>🔐 Cybersécurité Débutant → Expert</h4><p>Comprenez et protégez les systèmes informatiques.</p><div class="price">2 500 FCFA</div><button onclick="buy('Cybersécurité')">Acheter</button></div>
+<div class="card"><h4>🐧 Kali Linux</h4><p>Découvrez les outils de test de sécurité.</p><div class="price">2 500 FCFA</div><button onclick="buy('Kali Linux')">Acheter</button></div>
+<div class="card"><h4>🔥 Super Pack Cybersécurité</h4><p>Toutes les formations cybersécurité réunies.</p><div class="price">15 000 FCFA</div><button onclick="buy('Super Pack Cybersécurité')">Acheter</button></div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- FORMULAIRE -->
 <div id="orderForm">
-  <h2>🛒 Finaliser la commande</h2>
-  <form onsubmit="submitOrder(event)">
-    <input id="cname" placeholder="Nom et prénom" required>
-    <input id="cemail" type="email" placeholder="Email" required>
-    <input id="cphone" placeholder="Numéro WhatsApp" required>
-    <input id="ccountry" placeholder="Pays" required>
-    <button type="submit">Valider</button>
-  </form>
-  <a id="waLink" class="whatsapp" target="_blank">Finaliser sur WhatsApp</a>
+<h2>🛒 Finaliser la commande</h2>
+<form onsubmit="submitOrder(event)">
+<input id="name" placeholder="Nom et prénom" required>
+<input id="email" type="email" placeholder="Email" required>
+<input id="phone" placeholder="Numéro WhatsApp" required>
+<input id="country" placeholder="Pays" required>
+<button type="submit">Continuer</button>
+</form>
+<a id="waLink" class="whatsapp" target="_blank">Finaliser sur WhatsApp</a>
 </div>
 
 <footer>© 2025 Emmanuel Digital Store</footer>
 
 <script>
-// ===== Préchargement des 50+ produits si localStorage vide =====
-if(!localStorage.getItem("products")){
-  const defaultProducts = [
-    // --- FORMATIONS ---
-    {title:"🎓 Anglais complet", desc:"Formation complète pour parler et comprendre l’anglais.", price:2500, category:"Formations"},
-    {title:"💻 Informatique de base", desc:"Maîtriser l’ordinateur, Windows et Internet.", price:2500, category:"Formations"},
-    {title:"📈 Marketing digital", desc:"Stratégies pour vendre et se promouvoir en ligne.", price:2500, category:"Formations"},
-    {title:"🎨 Graphisme", desc:"Création de visuels professionnels (logos, flyers).", price:2500, category:"Formations"},
-    {title:"🎬 Montage vidéo", desc:"Montage vidéo pour réseaux sociaux et YouTube.", price:2500, category:"Formations"},
-    {title:"🤖 IA pratique", desc:"Utiliser l’intelligence artificielle au quotidien.", price:2500, category:"Formations"},
-    {title:"🚢 Import-Export", desc:"Comprendre le commerce international.", price:2500, category:"Formations"},
-    {title:"📊 Gestion de projet", desc:"Organisation et pilotage de projets.", price:2500, category:"Formations"},
-    {title:"💼 Vente & closing", desc:"Techniques de persuasion et de vente.", price:2500, category:"Formations"},
-    {title:"🎤 Prise de parole", desc:"S’exprimer avec assurance en public.", price:2500, category:"Formations"},
-    {title:"🛒 E-commerce", desc:"Créer et gérer une boutique en ligne.", price:2500, category:"Formations"},
-    {title:"🏗️ BTP & Architecture", desc:"Bases essentielles du bâtiment.", price:2500, category:"Formations"},
-    {title:"💇 Coiffure", desc:"Techniques professionnelles de coiffure.", price:2500, category:"Formations"},
-    {title:"🌱 Agriculture", desc:"Agriculture moderne et rentable.", price:2500, category:"Formations"},
-    {title:"🐄 Élevage", desc:"Bases de l’élevage animal.", price:2500, category:"Formations"},
-
-    // --- BUSINESS ---
-    {title:"📘 Ebook business", desc:"Stratégies pour entreprendre et réussir.", price:2500, category:"Business"},
-    {title:"📂 Templates business", desc:"Documents professionnels prêts à l’emploi.", price:2500, category:"Business"},
-    {title:"📄 CV professionnels", desc:"CV modernes pour décrocher un emploi.", price:2500, category:"Business"},
-    {title:"📊 Présentations pro", desc:"Présentations PowerPoint professionnelles.", price:2500, category:"Business"},
-    {title:"⏱️ Productivité", desc:"Méthodes pour mieux gérer son temps.", price:2500, category:"Business"},
-    {title:"🎧 Audio motivation", desc:"Audios pour rester motivé et discipliné.", price:2500, category:"Business"},
-    {title:"📦 Mini Pack Business", desc:"Regroupement d’outils business essentiels.", price:5000, category:"Packs"},
-
-    // --- DIGITAL ---
-    {title:"🌐 Développement web", desc:"Créer des sites web modernes.", price:2500, category:"Digital"},
-    {title:"🎥 Création de contenu", desc:"Créer du contenu engageant.", price:2500, category:"Digital"},
-    {title:"🤖 Prompts IA", desc:"Prompts efficaces pour l’IA.", price:2500, category:"Digital"},
-    {title:"💾 Logiciels utiles", desc:"Logiciels indispensables au quotidien.", price:2500, category:"Digital"},
-    {title:"📚 Bibliothèque PDF", desc:"Collection de ressources PDF.", price:2500, category:"Digital"},
-
-    // --- PACKS ---
-    {title:"📦 Mini Pack Formations", desc:"Plusieurs formations réunies.", price:5000, category:"Packs"},
-    {title:"📦 Mini Pack Digital", desc:"Outils digitaux essentiels.", price:5000, category:"Packs"},
-    {title:"🔥 Super Pack Global", desc:"Tous les produits réunis.", price:15000, category:"Packs"},
-    {title:"👑 Super Pack Premium", desc:"Pack ultime tout inclus.", price:15000, category:"Packs"},
-
-    // --- CYBERSÉCURITÉ ---
-    {title:"🔐 Cybersécurité Débutant → Expert (Partie 1)", desc:"Bases solides de la cybersécurité.", price:2500, category:"Cybersécurité"},
-    {title:"🔐 Cybersécurité Débutant → Expert (Partie 2)", desc:"Techniques avancées de sécurité.", price:2500, category:"Cybersécurité"},
-    {title:"👨‍💻 Hacker éthique", desc:"Apprendre le hacking légal.", price:2500, category:"Cybersécurité"},
-    {title:"🐧 Kali Linux", desc:"Outils de pentesting.", price:2500, category:"Cybersécurité"},
-    {title:"📶 WiFi Hacking", desc:"Sécurisation et tests WiFi.", price:2500, category:"Cybersécurité"},
-    {title:"🌐 Dark Web", desc:"Comprendre le Dark Web.", price:2500, category:"Cybersécurité"},
-    {title:"🔥 Super Pack Cybersécurité", desc:"Toutes les formations cybersécurité.", price:15000, category:"Cybersécurité"}
-  ];
-  localStorage.setItem("products", JSON.stringify(defaultProducts));
-}
-
-// ----- Récupérer depuis localStorage -----
-const products = JSON.parse(localStorage.getItem("products")) || [];
-let selectedProduct = null;
-const catalog = document.getElementById("catalog");
-
-// Grouper par catégorie
-function groupProducts() {
-  const groups = {};
-  products.forEach(p => {
-    if(!groups[p.category]) groups[p.category] = [];
-    groups[p.category].push(p);
-  });
-  return groups;
-}
-
-const categoryOrder = ["Formations","Business","Digital","Packs","Cybersécurité"];
-
-function render(filter="") {
-  catalog.innerHTML = "";
-  const groups = groupProducts();
-
-  categoryOrder.forEach(category => {
-    if(groups[category]){
-      let html = `<div class="category">
-        <h2>📦 ${category}</h2>
-        <div class="products">`;
-
-      groups[category].forEach((p,index) => {
-        if(p.title.toLowerCase().includes(filter)){
-          html += `
-          <div class="card">
-            <h4>${p.title}</h4>
-            <p>${p.desc}</p>
-            <p><strong>${p.price} FCFA</strong></p>
-            <button onclick="buyProduct(${index})">Acheter</button>
-          </div>`;
-        }
-      });
-
-      html += </div></div>;
-      catalog.innerHTML += html;
-    }
-  });
-}
-
-function buyProduct(index){
-  selectedProduct = products[index];
-  document.getElementById("orderForm").style.display = "block";
+let selectedProduct="";
+function buy(p){
+  selectedProduct=p;
+  document.getElementById("orderForm").style.display="block";
   window.scrollTo(0,document.body.scrollHeight);
 }
-
 function submitOrder(e){
   e.preventDefault();
-  const ref = "CMD-" + Date.now();
-  const msg = `Bonjour Emmanuel 👋
-Commande : ${selectedProduct.title}
-Nom : ${cname.value}
-Email : ${cemail.value}
-Pays : ${ccountry.value}
-Référence : ${ref}`;
-  const wa = document.getElementById("waLink");
-  wa.href = "https://wa.me/241066509602?text=" + encodeURIComponent(msg);
-  wa.style.display = "block";
+  const msg=`Bonjour Emmanuel 👋
+Produit : ${selectedProduct}
+Nom : ${name.value}
+Email : ${email.value}
+Pays : ${country.value}`;
+  const wa=document.getElementById("waLink");
+  wa.href="https://wa.me/241066509602?text="+encodeURIComponent(msg);
+  wa.style.display="block";
 }
-
-document.getElementById("search").onkeyup = () => render(document.getElementById("search").value.toLowerCase());
-render();
 </script>
 
 </body>
-      </html>
+</html>
