@@ -146,7 +146,6 @@ footer{
 
 <div class="container">
 
-  <!-- GAUCHE -->
   <div class="left">
     <img src="images/boutique.jpg" alt="Emmanuel Digital Store">
     <h2>👋 Qui suis-je ?</h2>
@@ -173,7 +172,6 @@ footer{
     </ul>
   </div>
 
-  <!-- DROITE -->
   <div class="right">
     <div class="search">
       <input type="text" id="search" placeholder="🔍 Rechercher un produit...">
@@ -201,8 +199,19 @@ footer{
 // ===== PRÉCHARGEMENT DES PRODUITS =====
 if(!localStorage.getItem("products")){
   const defaultProducts = [
-    // mêmes produits que précédemment, 50+ items avec "category" défini
-    // (je les garde pour éviter d’alourdir ce code ici, tu peux copier la liste exacte du code précédent)
+    // FORMATIONS
+    {title:"🎓 Anglais complet", desc:"Formation complète pour parler et comprendre l’anglais.", price:2500, image:"images/formations.jpg", category:"Formations"},
+    {title:"💻 Informatique de base", desc:"Maîtriser l’ordinateur, Windows et Internet.", price:2500, image:"images/formations.jpg", category:"Formations"},
+    {title:"📈 Marketing digital", desc:"Stratégies pour vendre et se promouvoir en ligne.", price:2500, image:"images/formations.jpg", category:"Formations"},
+    // BUSINESS
+    {title:"📘 Ebook business", desc:"Stratégies pour entreprendre et réussir.", price:2500, image:"images/business.jpg", category:"Business"},
+    {title:"📂 Templates business", desc:"Documents professionnels prêts à l’emploi.", price:2500, image:"images/business.jpg", category:"Business"},
+    // DIGITAL
+    {title:"🌐 Développement web", desc:"Créer des sites web modernes.", price:2500, image:"images/digital.jpg", category:"Digital"},
+    {title:"🎥 Création de contenu", desc:"Créer du contenu engageant.", price:2500, image:"images/digital.jpg", category:"Digital"},
+    // CYBERSÉCURITÉ
+    {title:"🔐 Cybersécurité Débutant → Expert (Partie 1)", desc:"Bases solides de la cybersécurité.", price:2500, image:"images/cyber.jpg", category:"Cybersécurité"},
+    {title:"🔐 Cybersécurité Débutant → Expert (Partie 2)", desc:"Techniques avancées de sécurité.", price:2500, image:"images/cyber.jpg", category:"Cybersécurité"},
   ];
   localStorage.setItem("products", JSON.stringify(defaultProducts));
 }
@@ -211,9 +220,7 @@ let selectedProduct=null;
 const catalog=document.getElementById("catalog");
 const products=JSON.parse(localStorage.getItem("products"))||[];
 
-const categoryOrder = ["Cybersécurité", "Formations", "Business", "Digital", "Packs"];
-
-// Regrouper par catégorie
+// Grouper par catégorie
 function groupProducts(){
   const groups={};
   products.forEach(p=>{
@@ -222,6 +229,8 @@ function groupProducts(){
   });
   return groups;
 }
+
+const categoryOrder = ["Formations","Business","Digital","Cybersécurité"];
 
 function render(filter=""){
   catalog.innerHTML="";
