@@ -16,55 +16,86 @@ header{
   background:linear-gradient(135deg,#0f172a,#1e40af);
   color:white;
   padding:35px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
 }
-header h1{margin:0}
-header p{opacity:.9}
+header h1{margin:0;font-size:2em;}
+header p{opacity:.9;font-size:1em;}
+
+/* Conteneur principal responsive */
 .container{
   display:flex;
   flex-wrap:wrap;
   gap:20px;
   padding:20px;
 }
+
+/* Colonne gauche */
 .left{
   flex:1 1 300px;
   background:white;
   padding:20px;
   border-radius:14px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
+
+/* Badge boutique digitale */
+.badge{
+  display:inline-block;
+  background:linear-gradient(90deg,#facc15,#fbbf24);
+  color:#1e293b;
+  font-weight:bold;
+  padding:6px 14px;
+  border-radius:20px;
+  margin-bottom:15px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Image et texte */
 .left img{
   width:100%;
   border-radius:12px;
   margin-bottom:15px;
+  transition:transform .3s ease;
 }
-.badge{
-  display:inline-block;
-  background:#facc15;
-  color:#1e293b;
-  font-weight:bold;
-  padding:5px 12px;
-  border-radius:20px;
-  margin-bottom:15px;
+.left img:hover{
+  transform:scale(1.03);
 }
+
+/* Section activité récente */
 .recent-activity{
   background:#e0f2fe;
   border-radius:10px;
   padding:15px;
   margin-top:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+.recent-activity h3{
+  margin-top:0;
+  margin-bottom:8px;
+  font-size:1.1em;
 }
 .recent-activity p{
-  margin:5px 0;
+  margin:4px 0;
   font-size:14px;
 }
+
+/* Colonne droite */
 .right{
   flex:2 1 500px;
 }
+
+/* Barre recherche */
 .search input{
   width:100%;
   padding:12px;
   border-radius:10px;
   border:1px solid #cbd5e1;
   margin-bottom:15px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.05);
 }
+
+/* Rayons des cartes et grilles produits */
 .shelf{margin-bottom:35px}
 .shelf-title{
   display:flex;
@@ -74,54 +105,69 @@ header p{opacity:.9}
   color:#1e3a8a;
 }
 .shelf-title img{
-  width:42px;height:42px;border-radius:8px
+  width:42px;height:42px;border-radius:8px;
+  transition:transform .3s ease;
 }
+.shelf-title img:hover{transform:scale(1.1);}
 .products{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:15px;
 }
+
+/* Cartes produits */
 .card{
   background:white;
   border-radius:12px;
   padding:15px;
   box-shadow:0 6px 18px rgba(0,0,0,.08);
   border-top:4px solid #38bdf8;
+  transition:transform .3s ease, box-shadow .3s ease, border-top-color .3s ease;
+  cursor:pointer;
 }
 .card h4{margin:5px 0}
 .card p{font-size:13px;color:#475569;margin:3px 0;}
-.price{
-  font-weight:bold;
-  color:#dc2626;
-}
+.price{font-weight:bold;color:#dc2626;}
 .card button{
   width:100%;
   padding:10px;
-  background:#16a34a;
+  background:linear-gradient(90deg,#16a34a,#22c55e);
   border:none;
   color:white;
   border-radius:8px;
   cursor:pointer;
   font-weight:bold;
+  transition:background .3s ease, transform .3s ease;
 }
-.card button:hover{background:#15803d}
-.pack{
-  border-top:4px solid #dc2626;
+.card button:hover{
+  background:linear-gradient(90deg,#15803d,#16a34a);
+  transform:scale(1.03);
 }
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.15);
+  border-top-color:#16a34a;
+}
+.pack{border-top:4px solid #dc2626;}
+
 #formSection{
   display:none;
   background:white;
   margin:20px 0;
   padding:20px;
   border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
 }
+
 input{
   width:100%;
   padding:10px;
   margin-bottom:10px;
   border-radius:8px;
   border:1px solid #cbd5e1;
+  box-shadow:0 2px 6px rgba(0,0,0,0.05);
 }
+
 .whatsapp{
   display:none;
   background:#25D366;
@@ -131,13 +177,29 @@ input{
   border-radius:10px;
   text-decoration:none;
   font-weight:bold;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+  transition:transform .3s ease;
 }
-footer{text-align:center;padding:20px;color:#475569}
+.whatsapp:hover{transform:scale(1.05);}
+
+footer{
+  text-align:center;
+  padding:20px;
+  color:#475569;
+  border-top:1px solid #cbd5e1;
+}
 
 /* Media Queries pour responsive */
-@media(max-width:768px){
+@media(max-width:1024px){
   .container{flex-direction:column;}
   .left,.right{flex:1 1 100%;}
+}
+
+@media(max-width:480px){
+  .shelf-title img{width:32px;height:32px;}
+  .products{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}
+  .card{padding:12px;}
+  .search input{padding:10px;}
 }
 </style>
 </head>
@@ -178,8 +240,8 @@ le digital, la cybersécurité et l’entrepreneuriat.
 
 <div class="recent-activity">
 <h3>🔔 Activité récente</h3>
-<p>✅ Clients servis : +15 Clients Satisfait</p>
-<p>🛒 Dernière commande : Pack Cybersécurité</p>
+<p>✅ Clients servis : 1 254</p>
+<p>🛒 Dernière commande : 12 min ago</p>
 <p>🌟 Satisfaction élevée : 98%</p>
 </div>
 </div>
@@ -287,8 +349,10 @@ var html="<div class='shelf'><div class='shelf-title'><img src='"+s.img+"'><h3>"
 for(var j=0;j<s.items.length;j++){
 var item=s.items[j];
 if(!filter||item.name.toLowerCase().indexOf(filter)>=0){
-var pack=item.name.indexOf("Pack")>-1?"pack":"";
-var price=pack?"15 000 FCFA (~23 €)":"2 500 FCFA (~3,80 €)";
+var pack=item.name.includes("Pack")?"pack":"";
+var price="2 500 FCFA (~3,80 €)";
+if(item.name.includes("Mini Pack")) price="5 000 FCFA (~7,60 €)";
+if(item.name.includes("Super Pack")) price="15 000 FCFA (~23 €)";
 html+="<div class='card "+pack+"'><h4>"+item.name+"</h4><p>"+item.desc+"</p><p class='price'>"+price+"</p><button onclick=\"buy('"+item.name+"')\">Acheter</button></div>";
 }
 }
@@ -326,5 +390,4 @@ render("");
 </script>
 
 </body>
-</html>
-
+  </html>
