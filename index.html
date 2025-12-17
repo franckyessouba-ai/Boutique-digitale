@@ -9,121 +9,124 @@
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#eef2ff;
-  color:#0f172a;
+  background:#eef1f7;
+  color:#1e293b;
 }
 header{
-  background:linear-gradient(135deg,#1e3a8a,#0f172a);
+  background:linear-gradient(135deg,#1e1b4b,#4c1d95);
   color:white;
-  padding:40px 20px;
+  padding:30px;
 }
-header h1{margin:0;font-size:32px}
-header p{margin-top:5px;color:#c7d2fe}
-
 .container{
   display:flex;
   gap:20px;
   padding:20px;
-  max-width:1400px;
-  margin:auto;
 }
-
 .left{
-  width:32%;
+  width:35%;
   background:white;
-  padding:25px;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.1);
+  padding:20px;
+  border-radius:12px;
 }
-.left h2{margin-top:0}
-.badge{
-  background:#dc2626;
-  color:white;
-  padding:6px 12px;
-  border-radius:999px;
-  font-size:13px;
-  display:inline-block;
-  margin-bottom:10px;
-}
-
-.stat{
-  background:#f1f5f9;
-  padding:12px;
+.left img{
+  width:100%;
   border-radius:10px;
+  margin-bottom:15px;
+}
+.right{
+  width:65%;
+}
+.search{
+  margin-bottom:15px;
+}
+.search input{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+.shelf{
+  margin-bottom:30px;
+}
+.shelf-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
   margin-bottom:10px;
-  font-size:14px;
 }
-
-.right{width:68%}
-
-.category{
-  margin-bottom:45px;
+.shelf-title img{
+  width:40px;
+  height:40px;
+  border-radius:6px;
 }
-.category h2{
-  color:#1e3a8a;
-  border-left:5px solid #22c55e;
-  padding-left:10px;
-}
-
 .products{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:15px;
 }
-
 .card{
   background:white;
-  border-radius:16px;
-  padding:16px;
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
-  display:flex;
-  flex-direction:column;
+  border-radius:10px;
+  padding:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 .card h4{margin:5px 0}
-.card p{font-size:13px;color:#475569;flex-grow:1}
-.price{font-weight:bold;margin:8px 0}
-
+.card p{font-size:13px;color:#555;margin:3px 0;}
 .card button{
-  padding:12px;
+  width:100%;
+  padding:10px;
   background:#22c55e;
   border:none;
   color:white;
-  border-radius:10px;
-  font-weight:700;
+  border-radius:6px;
   cursor:pointer;
 }
 .card button:hover{background:#16a34a}
-
-#orderForm{
+#formSection{
   display:none;
   background:white;
-  padding:25px;
-  margin:20px auto;
-  max-width:600px;
-  border-radius:16px;
+  margin:20px;
+  padding:20px;
+  border-radius:10px;
 }
-#orderForm input{
+input{
   width:100%;
-  padding:12px;
+  padding:10px;
   margin-bottom:10px;
-  border-radius:8px;
-  border:1px solid #ccc;
 }
 .whatsapp{
   display:none;
   background:#25D366;
   color:white;
-  padding:14px;
+  padding:12px;
   text-align:center;
-  border-radius:12px;
-  font-weight:800;
+  border-radius:8px;
   text-decoration:none;
+  font-weight:bold;
 }
-
 footer{
   text-align:center;
-  padding:25px;
-  color:#475569;
+  padding:20px;
+  color:#555;
+}
+.badge{
+  display:inline-block;
+  background:#facc15;
+  color:#1e293b;
+  font-weight:bold;
+  padding:5px 10px;
+  border-radius:20px;
+  margin-bottom:15px;
+}
+.recent-activity{
+  background:#f0f5ff;
+  border-radius:10px;
+  padding:15px;
+  margin-top:15px;
+}
+.recent-activity p{
+  margin:5px 0;
+  font-size:14px;
 }
 </style>
 </head>
@@ -131,108 +134,209 @@ footer{
 <body>
 
 <header>
-  <h1>🚀 Emmanuel Digital Store</h1>
-  <p>📚 Formations • 💼 Business • 🔐 Cybersécurité • 🌐 Digital</p>
+  <h1>Emmanuel Digital Store</h1>
+  <p>Formations • Business • Ressources numériques premium</p>
 </header>
 
 <div class="container">
 
-<!-- GAUCHE : CONFIANCE -->
-<div class="left">
-  <span class="badge">🔥 Boutique digitale</span>
-  <h2>👋 À propos</h2>
-  <p>
-    Je m’appelle <strong>Emmanuel</strong>, jeune étudiant passionné par le digital
-    et l’apprentissage.  
-    Cette boutique a pour but de rendre la connaissance et les outils numériques
-    accessibles à tous.
-  </p>
+  <!-- GAUCHE -->
+  <div class="left">
+    <div class="badge">🏪 Boutique Digitale</div>
 
-  <h3>📦 Activité récente</h3>
-  <div class="stat">✅ +150 clients servis</div>
-  <div class="stat">🕒 Dernière commande : Pack Cybersécurité</div>
-  <div class="stat">⭐ Satisfaction élevée</div>
+    <img src="images/boutique.jpg" alt="boutique">
 
-  <h3>💡 Pourquoi acheter ici ?</h3>
-  <ul>
-    <li>✔ Produits utiles et pratiques</li>
-    <li>✔ Prix abordables</li>
-    <li>✔ Support direct sur WhatsApp</li>
-    <li>✔ Livraison rapide après paiement</li>
-  </ul>
-</div>
+    <h2>Qui suis-je ?</h2>
+    <p>
+      Je m’appelle <strong>Emmanuel</strong>, jeune étudiant ambitieux,
+      passionné par le digital, l’apprentissage et l’entrepreneuriat.
+      Comme beaucoup de jeunes, je me cherche, j’apprends et je construis
+      mon avenir avec sérieux.
+    </p>
 
-<!-- DROITE : PRODUITS -->
-<div class="right">
+    <h3>Comment ça fonctionne ?</h3>
+    <p>
+      Après votre commande, vous recevez un <strong>lien sécurisé</strong>
+      vous donnant accès au produit ou à la formation.
+      Ces liens sont faciles à utiliser, accessibles sur téléphone
+      et ordinateur.
+    </p>
 
-<!-- FORMATIONS -->
-<div class="category">
-<h2>🎓 Formations</h2>
-<div class="products">
-<div class="card"><h4>🎓 Anglais complet</h4><p>Apprenez à parler, comprendre et écrire l’anglais pour le travail et le business.</p><div class="price">2 500 FCFA</div><button onclick="buy('Anglais complet')">Acheter</button></div>
-<div class="card"><h4>💻 Informatique de base</h4><p>Maîtrisez l’ordinateur, Windows, Internet et les bases numériques.</p><div class="price">2 500 FCFA</div><button onclick="buy('Informatique de base')">Acheter</button></div>
-<div class="card"><h4>📈 Marketing digital</h4><p>Apprenez à vendre, faire de la publicité et attirer des clients en ligne.</p><div class="price">2 500 FCFA</div><button onclick="buy('Marketing digital')">Acheter</button></div>
-<div class="card"><h4>🎨 Graphisme</h4><p>Créez des logos, flyers et visuels professionnels.</p><div class="price">2 500 FCFA</div><button onclick="buy('Graphisme')">Acheter</button></div>
-<div class="card"><h4>🎬 Montage vidéo</h4><p>Réalisez des vidéos attractives pour réseaux sociaux.</p><div class="price">2 500 FCFA</div><button onclick="buy('Montage vidéo')">Acheter</button></div>
-</div>
-</div>
+    <h3>Pourquoi choisir cette boutique ?</h3>
+    <ul>
+      <li>✔ Produits sélectionnés et utiles</li>
+      <li>✔ Prix accessibles</li>
+      <li>✔ Support humain via WhatsApp</li>
+      <li>✔ Apprentissage rapide et pratique</li>
+    </ul>
 
-<!-- BUSINESS -->
-<div class="category">
-<h2>💼 Business & Outils</h2>
-<div class="products">
-<div class="card"><h4>📘 Ebook business</h4><p>Stratégies pratiques pour lancer et développer un business.</p><div class="price">2 500 FCFA</div><button onclick="buy('Ebook business')">Acheter</button></div>
-<div class="card"><h4>📂 Templates business</h4><p>Documents professionnels prêts à l’emploi.</p><div class="price">2 500 FCFA</div><button onclick="buy('Templates business')">Acheter</button></div>
-<div class="card"><h4>📦 Mini Pack Business</h4><p>Un regroupement d’outils essentiels pour entrepreneurs.</p><div class="price">5 000 FCFA</div><button onclick="buy('Mini Pack Business')">Acheter</button></div>
-</div>
-</div>
+    <div class="recent-activity">
+      <h3>🔔 Activité récente</h3>
+      <p>✅ Clients servis : 1 254</p>
+      <p>🛒 Dernière commande : 12 min ago</p>
+      <p>🌟 Satisfaction élevée : 98%</p>
+    </div>
+  </div>
 
-<!-- CYBERSÉCURITÉ -->
-<div class="category">
-<h2>🔐 Cybersécurité & Hacking</h2>
-<div class="products">
-<div class="card"><h4>🔐 Cybersécurité Débutant → Expert</h4><p>Comprenez et protégez les systèmes informatiques.</p><div class="price">2 500 FCFA</div><button onclick="buy('Cybersécurité')">Acheter</button></div>
-<div class="card"><h4>🐧 Kali Linux</h4><p>Découvrez les outils de test de sécurité.</p><div class="price">2 500 FCFA</div><button onclick="buy('Kali Linux')">Acheter</button></div>
-<div class="card"><h4>🔥 Super Pack Cybersécurité</h4><p>Toutes les formations cybersécurité réunies.</p><div class="price">15 000 FCFA</div><button onclick="buy('Super Pack Cybersécurité')">Acheter</button></div>
-</div>
+  <!-- DROITE -->
+  <div class="right">
+
+    <div class="search">
+      <input type="text" id="search" placeholder="Rechercher une formation, un pack, un outil…">
+    </div>
+
+    <div id="shelves"></div>
+
+  </div>
 </div>
 
-</div>
-</div>
-
-<!-- FORMULAIRE -->
-<div id="orderForm">
-<h2>🛒 Finaliser la commande</h2>
-<form onsubmit="submitOrder(event)">
-<input id="name" placeholder="Nom et prénom" required>
-<input id="email" type="email" placeholder="Email" required>
-<input id="phone" placeholder="Numéro WhatsApp" required>
-<input id="country" placeholder="Pays" required>
-<button type="submit">Continuer</button>
-</form>
-<a id="waLink" class="whatsapp" target="_blank">Finaliser sur WhatsApp</a>
+<div id="formSection">
+  <h2>Finaliser la commande</h2>
+  <form onsubmit="submitOrder(event)">
+    <input type="text" id="name" placeholder="Nom et prénom" required>
+    <input type="email" id="email" placeholder="Adresse email" required>
+    <input type="tel" id="phone" placeholder="Numéro WhatsApp" required>
+    <input type="text" id="country" placeholder="Pays de résidence" required>
+    <button type="submit">Valider</button>
+  </form>
+  <br>
+  <a id="whatsappLink" class="whatsapp" target="_blank">Finaliser sur WhatsApp</a>
 </div>
 
 <footer>© 2025 Emmanuel Digital Store</footer>
 
 <script>
-let selectedProduct="";
-function buy(p){
-  selectedProduct=p;
-  document.getElementById("orderForm").style.display="block";
-  window.scrollTo(0,document.body.scrollHeight);
+var selectedProduct="";
+
+// Données avec descriptions
+var data=[
+{
+ cat:"Formations",
+ img:"images/formations.jpg",
+ items:[
+  {name:"Anglais complet", desc:"Cours complet d'anglais pour tous niveaux, comprenant grammaire, vocabulaire et conversation pratique."},
+  {name:"Informatique de base", desc:"Apprenez les fondamentaux de l'informatique, bureautique et navigation internet."},
+  {name:"Marketing digital", desc:"Stratégies de marketing digital pour booster votre business en ligne."},
+  {name:"Graphisme", desc:"Formation complète en design graphique, Photoshop, Illustrator et création de visuels professionnels."},
+  {name:"Montage vidéo", desc:"Apprenez à créer et monter des vidéos attractives pour YouTube, TikTok et réseaux sociaux."},
+  {name:"IA pratique", desc:"Découverte et utilisation pratique de l'intelligence artificielle pour vos projets."},
+  {name:"Import-Export", desc:"Guide complet pour lancer et gérer un business d'import-export."},
+  {name:"Gestion de projet", desc:"Maîtrisez la planification, l’organisation et le suivi de vos projets."},
+  {name:"Vente & closing", desc:"Techniques de vente efficaces et comment conclure vos ventes avec succès."},
+  {name:"Prise de parole", desc:"Améliorez votre communication et votre aisance en public."},
+  {name:"E-commerce", desc:"Créer et gérer votre boutique en ligne rentable."},
+  {name:"BTP & Architecture", desc:"Formation spécialisée pour le secteur BTP et architecture."},
+  {name:"Coiffure", desc:"Techniques professionnelles pour devenir coiffeur expert."},
+  {name:"Agriculture", desc:"Formation pratique pour améliorer votre production agricole."},
+  {name:"Élevage", desc:"Apprenez à gérer et optimiser un élevage rentable."}
+ ]
+},
+{
+ cat:"Business",
+ img:"images/business.jpg",
+ items:[
+  {name:"Ebook business", desc:"Ebooks spécialisés pour lancer et gérer votre entreprise efficacement."},
+  {name:"Templates business", desc:"Modèles professionnels pour documents, présentations et contrats."},
+  {name:"CV professionnels", desc:"Créer des CV percutants pour décrocher votre emploi ou stage."},
+  {name:"Présentations pro", desc:"Apprenez à créer des présentations efficaces et attractives."},
+  {name:"Productivité", desc:"Techniques pour améliorer votre gestion du temps et productivité."},
+  {name:"Livres audio motivation", desc:"Ecoutez des livres inspirants pour booster votre motivation."},
+  {name:"Pack démarrage business", desc:"Pack complet pour lancer votre business rapidement et efficacement."}
+ ]
+},
+{
+ cat:"Digital",
+ img:"images/digital.jpg",
+ items:[
+  {name:"Développement web", desc:"Apprenez à coder et créer des sites web modernes et fonctionnels."},
+  {name:"Création de contenu", desc:"Techniques pour produire du contenu attractif pour réseaux sociaux et blogs."},
+  {name:"Prompts IA", desc:"Prompts avancés pour exploiter l'IA dans vos projets professionnels."},
+  {name:"Logiciels utiles", desc:"Liste et tutoriels pour utiliser des logiciels indispensables au digital."},
+  {name:"Bibliothèque PDF", desc:"Collection de ressources PDF utiles pour l’apprentissage digital."}
+ ]
+},
+{
+ cat:"Packs",
+ img:"images/packs.jpg",
+ items:[
+  {name:"Mini Pack Formations", desc:"Sélection de formations essentielles pour débuter dans le digital."},
+  {name:"Mini Pack Business", desc:"Ressources clés pour lancer votre business facilement."},
+  {name:"Mini Pack Digital", desc:"Outils et guides pour travailler efficacement dans le digital."},
+  {name:"Super Pack Global", desc:"Pack complet avec toutes les ressources essentielles pour le succès."},
+  {name:"Super Pack Premium (Tout inclus)", desc:"Le pack ultime incluant toutes les formations, ebooks et outils premium."}
+ ]
+},
+{
+ cat:"Cybersécurité & Hacking",
+ img:"images/cyber.jpg",
+ items:[
+  {name:"Certification Cybersécurité Débutant à Expert – Partie 1", desc:"Module 1 pour débuter et progresser rapidement en cybersécurité."},
+  {name:"Certification Cybersécurité Débutant à Expert – Partie 2", desc:"Module 2 pour approfondir vos compétences en cybersécurité."},
+  {name:"Guide Ultime du Hacker Éthique (via ChatGPT)", desc:"Apprenez le hacking éthique de manière pratique avec ChatGPT."},
+  {name:"Cybersécurité & gouvernance pour les leaders", desc:"Formation pour dirigeants sur la sécurité informatique et gouvernance."},
+  {name:"Améliorer le Wi-Fi de votre PME", desc:"Techniques pour sécuriser et optimiser votre réseau Wi-Fi professionnel."},
+  {name:"Hacking Éthique – Le cours complet", desc:"Cours complet pour devenir un hacker éthique certifié."},
+  {name:"Hacking Éthique – Metasploit & Exploits Zero-days", desc:"Maîtrisez les outils avancés de test d’intrusion."},
+  {name:"Hacking Éthique – Ingénierie sociale", desc:"Comprendre et utiliser l’ingénierie sociale pour tests éthiques."},
+  {name:"Hacking Éthique – Hacker Facebook", desc:"Techniques de sécurité et test d’accès sur plateformes sociales."},
+  {name:"Sécurité Internet : mots de passe & bonnes pratiques", desc:"Guide complet pour protéger vos comptes et données."},
+  {name:"WiFi Hacking – Cours complet", desc:"Apprenez à tester et sécuriser les réseaux Wi-Fi."},
+  {name:"L’essentiel de Kali Linux", desc:"Maîtrisez Kali Linux pour vos audits et tests de sécurité."},
+  {name:"Apprendre le piratage éthique (débutant à expert)", desc:"Devenez un expert en sécurité informatique étape par étape."},
+  {name:"Sécurité informatique – Niveau avancé", desc:"Approfondissement des techniques de protection et tests d’intrusion."},
+  {name:"Cours complet sur le Dark Web", desc:"Découvrez le Dark Web et ses usages de manière sécurisée."},
+  {name:"Fondements de la cybersécurité", desc:"Bases théoriques et pratiques pour comprendre la cybersécurité."},
+  {name:"OpenSSL & cryptage des données", desc:"Apprenez à chiffrer vos données et communications."},
+  {name:"Sécuriser son site avec un certificat SSL", desc:"Guide pratique pour installer et configurer SSL sur votre site."}
+ ]
 }
+];
+
+var shelves=document.getElementById("shelves");
+
+function render(filter){
+ shelves.innerHTML="";
+ for(var i=0;i<data.length;i++){
+  var shelf=data[i];
+  var html="<div class='shelf'><div class='shelf-title'><img src='"+shelf.img+"'><h3>"+shelf.cat+"</h3></div><div class='products'>";
+  for(var j=0;j<shelf.items.length;j++){
+   var item=shelf.items[j];
+   if(!filter || item.name.toLowerCase().indexOf(filter)>=0){
+    html+="<div class='card'><h4>"+item.name+"</h4><p>"+item.desc+"</p><p><strong>2 500 FCFA</strong></p><button onclick=\"buy('"+item.name+"')\">Acheter</button></div>";
+   }
+  }
+  html+="</div></div>";
+  shelves.innerHTML+=html;
+ }
+}
+
+function buy(name){
+ selectedProduct=name;
+ document.getElementById("formSection").style.display="block";
+ window.scrollTo(0,document.body.scrollHeight);
+}
+
 function submitOrder(e){
-  e.preventDefault();
-  const msg=`Bonjour Emmanuel 👋
-Produit : ${selectedProduct}
-Nom : ${name.value}
-Email : ${email.value}
-Pays : ${country.value}`;
-  const wa=document.getElementById("waLink");
-  wa.href="https://wa.me/241066509602?text="+encodeURIComponent(msg);
-  wa.style.display="block";
+ e.preventDefault();
+ var name=document.getElementById("name").value;
+ var email=document.getElementById("email").value;
+ var country=document.getElementById("country").value;
+ var ref="CMD-"+Math.floor(Math.random()*100000);
+ var msg="Bonjour Emmanuel,%0ACommande : "+selectedProduct+
+ "%0ANom : "+name+
+ "%0AEmail : "+email+
+ "%0APays : "+country+
+ "%0ARef : "+ref;
+ var wa=document.getElementById("whatsappLink");
+ wa.href="https://wa.me/241066509602?text="+msg;
+ wa.style.display="block";
 }
+
+document.getElementById("search").onkeyup=function(){
+ render(this.value.toLowerCase());
+};
+
+render("");
 </script>
 
 </body>
