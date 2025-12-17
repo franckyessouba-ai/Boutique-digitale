@@ -9,55 +9,72 @@
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#eef1f7;
-  color:#1e293b;
+  background:#f1f5f9;
+  color:#0f172a;
 }
 header{
-  background:linear-gradient(135deg,#1e1b4b,#4c1d95);
+  background:linear-gradient(135deg,#0f172a,#1e40af);
   color:white;
-  padding:30px;
+  padding:35px;
 }
+header h1{margin:0}
+header p{opacity:.9}
 .container{
   display:flex;
+  flex-wrap:wrap;
   gap:20px;
   padding:20px;
 }
 .left{
-  width:35%;
+  flex:1 1 300px;
   background:white;
   padding:20px;
-  border-radius:12px;
+  border-radius:14px;
 }
 .left img{
   width:100%;
-  border-radius:10px;
+  border-radius:12px;
   margin-bottom:15px;
+}
+.badge{
+  display:inline-block;
+  background:#facc15;
+  color:#1e293b;
+  font-weight:bold;
+  padding:5px 12px;
+  border-radius:20px;
+  margin-bottom:15px;
+}
+.recent-activity{
+  background:#e0f2fe;
+  border-radius:10px;
+  padding:15px;
+  margin-top:20px;
+}
+.recent-activity p{
+  margin:5px 0;
+  font-size:14px;
 }
 .right{
-  width:65%;
-}
-.search{
-  margin-bottom:15px;
+  flex:2 1 500px;
 }
 .search input{
   width:100%;
   padding:12px;
-  border-radius:8px;
-  border:1px solid #ccc;
+  border-radius:10px;
+  border:1px solid #cbd5e1;
+  margin-bottom:15px;
 }
-.shelf{
-  margin-bottom:30px;
-}
+.shelf{margin-bottom:35px}
 .shelf-title{
   display:flex;
   align-items:center;
   gap:10px;
-  margin-bottom:10px;
+  margin-bottom:12px;
+  color:#1e3a8a;
 }
 .shelf-title img{
-  width:40px;
-  height:40px;
-  border-radius:6px;
+  width:42px;height:42px;border-radius:8px
 }
 .products{
   display:grid;
@@ -66,33 +83,44 @@ header{
 }
 .card{
   background:white;
-  border-radius:10px;
+  border-radius:12px;
   padding:15px;
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  border-top:4px solid #38bdf8;
 }
 .card h4{margin:5px 0}
-.card p{font-size:13px;color:#555;margin:3px 0;}
+.card p{font-size:13px;color:#475569;margin:3px 0;}
+.price{
+  font-weight:bold;
+  color:#dc2626;
+}
 .card button{
   width:100%;
   padding:10px;
-  background:#22c55e;
+  background:#16a34a;
   border:none;
   color:white;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
+  font-weight:bold;
 }
-.card button:hover{background:#16a34a}
+.card button:hover{background:#15803d}
+.pack{
+  border-top:4px solid #dc2626;
+}
 #formSection{
   display:none;
   background:white;
-  margin:20px;
+  margin:20px 0;
   padding:20px;
-  border-radius:10px;
+  border-radius:14px;
 }
 input{
   width:100%;
   padding:10px;
   margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #cbd5e1;
 }
 .whatsapp{
   display:none;
@@ -100,33 +128,16 @@ input{
   color:white;
   padding:12px;
   text-align:center;
-  border-radius:8px;
+  border-radius:10px;
   text-decoration:none;
   font-weight:bold;
 }
-footer{
-  text-align:center;
-  padding:20px;
-  color:#555;
-}
-.badge{
-  display:inline-block;
-  background:#facc15;
-  color:#1e293b;
-  font-weight:bold;
-  padding:5px 10px;
-  border-radius:20px;
-  margin-bottom:15px;
-}
-.recent-activity{
-  background:#f0f5ff;
-  border-radius:10px;
-  padding:15px;
-  margin-top:15px;
-}
-.recent-activity p{
-  margin:5px 0;
-  font-size:14px;
+footer{text-align:center;padding:20px;color:#475569}
+
+/* Media Queries pour responsive */
+@media(max-width:768px){
+  .container{flex-direction:column;}
+  .left,.right{flex:1 1 100%;}
 }
 </style>
 </head>
@@ -134,73 +145,63 @@ footer{
 <body>
 
 <header>
-  <h1>Emmanuel Digital Store</h1>
-  <p>Formations • Business • Ressources numériques premium</p>
+  <h1>🚀 Emmanuel Digital Store</h1>
+  <p>🎓 Formations • 🔐 Cybersécurité • 💼 Business • 📦 Packs Premium</p>
 </header>
 
 <div class="container">
 
-  <!-- GAUCHE -->
-  <div class="left">
-    <div class="badge">🏪 Boutique Digitale</div>
+<div class="left">
+<div class="badge">🏪 Boutique Digitale</div>
+<img src="images/boutique.jpg">
+<h2>👋 À propos</h2>
+<p>
+Je m’appelle <strong>Emmanuel</strong>, jeune étudiant ambitieux passionné par
+le digital, la cybersécurité et l’entrepreneuriat.
+</p>
 
-    <img src="images/boutique.jpg" alt="boutique">
+<h3>📌 Comment ça marche ?</h3>
+<p>
+1️⃣ Choisissez un produit<br>
+2️⃣ Remplissez le formulaire<br>
+3️⃣ Finalisez sur WhatsApp<br>
+4️⃣ Recevez votre lien sécurisé
+</p>
 
-    <h2>Qui suis-je ?</h2>
-    <p>
-      Je m’appelle <strong>Emmanuel</strong>, jeune étudiant ambitieux,
-      passionné par le digital, l’apprentissage et l’entrepreneuriat.
-      Comme beaucoup de jeunes, je me cherche, j’apprends et je construis
-      mon avenir avec sérieux.
-    </p>
+<h3>✅ Avantages</h3>
+<ul>
+<li>✔ Ressources utiles et pratiques</li>
+<li>✔ Prix accessibles</li>
+<li>✔ Support humain direct</li>
+<li>✔ Accès rapide après paiement</li>
+</ul>
 
-    <h3>Comment ça fonctionne ?</h3>
-    <p>
-      Après votre commande, vous recevez un <strong>lien sécurisé</strong>
-      vous donnant accès au produit ou à la formation.
-      Ces liens sont faciles à utiliser, accessibles sur téléphone
-      et ordinateur.
-    </p>
+<div class="recent-activity">
+<h3>🔔 Activité récente</h3>
+<p>✅ Clients servis : 1 254</p>
+<p>🛒 Dernière commande : 12 min ago</p>
+<p>🌟 Satisfaction élevée : 98%</p>
+</div>
+</div>
 
-    <h3>Pourquoi choisir cette boutique ?</h3>
-    <ul>
-      <li>✔ Produits sélectionnés et utiles</li>
-      <li>✔ Prix accessibles</li>
-      <li>✔ Support humain via WhatsApp</li>
-      <li>✔ Apprentissage rapide et pratique</li>
-    </ul>
-
-    <div class="recent-activity">
-      <h3>🔔 Activité récente</h3>
-      <p>✅ Clients servis : +15 Clients Satisfait</p>
-      <p>🛒 Dernière commande : Pack Cybersécurisé</p>
-      <p>🌟 Satisfaction élevée : 98%</p>
-    </div>
-  </div>
-
-  <!-- DROITE -->
-  <div class="right">
-
-    <div class="search">
-      <input type="text" id="search" placeholder="Rechercher une formation, un pack, un outil…">
-    </div>
-
-    <div id="shelves"></div>
-
-  </div>
+<div class="right">
+<div class="search">
+<input id="search" placeholder="🔍 Rechercher une formation, un pack…">
+</div>
+<div id="shelves"></div>
+</div>
 </div>
 
 <div id="formSection">
-  <h2>Finaliser la commande</h2>
-  <form onsubmit="submitOrder(event)">
-    <input type="text" id="name" placeholder="Nom et prénom" required>
-    <input type="email" id="email" placeholder="Adresse email" required>
-    <input type="tel" id="phone" placeholder="Numéro WhatsApp" required>
-    <input type="text" id="country" placeholder="Pays de résidence" required>
-    <button type="submit">Valider</button>
-  </form>
-  <br>
-  <a id="whatsappLink" class="whatsapp" target="_blank">Finaliser sur WhatsApp</a>
+<h2>🧾 Finaliser la commande</h2>
+<form onsubmit="submitOrder(event)">
+<input id="name" placeholder="Nom et prénom" required>
+<input id="email" type="email" placeholder="Adresse email" required>
+<input id="phone" placeholder="Numéro WhatsApp" required>
+<input id="country" placeholder="Pays de résidence" required>
+<button type="submit">Valider</button>
+</form><br>
+<a id="whatsappLink" class="whatsapp" target="_blank">💬 Finaliser sur WhatsApp</a>
 </div>
 
 <footer>© 2025 Emmanuel Digital Store</footer>
@@ -208,137 +209,121 @@ footer{
 <script>
 var selectedProduct="";
 
-// Données avec descriptions
 var data=[
 {
- cat:"Formations",
- img:"images/formations.jpg",
- items:[
-  {name:"Anglais complet", desc:"Cours complet d'anglais pour tous niveaux, comprenant grammaire, vocabulaire et conversation pratique."},
-  {name:"Informatique de base", desc:"Apprenez les fondamentaux de l'informatique, bureautique et navigation internet."},
-  {name:"Marketing digital", desc:"Stratégies de marketing digital pour booster votre business en ligne."},
-  {name:"Graphisme", desc:"Formation complète en design graphique, Photoshop, Illustrator et création de visuels professionnels."},
-  {name:"Montage vidéo", desc:"Apprenez à créer et monter des vidéos attractives pour YouTube, TikTok et réseaux sociaux."},
-  {name:"IA pratique", desc:"Découverte et utilisation pratique de l'intelligence artificielle pour vos projets."},
-  {name:"Import-Export", desc:"Guide complet pour lancer et gérer un business d'import-export."},
-  {name:"Gestion de projet", desc:"Maîtrisez la planification, l’organisation et le suivi de vos projets."},
-  {name:"Vente & closing", desc:"Techniques de vente efficaces et comment conclure vos ventes avec succès."},
-  {name:"Prise de parole", desc:"Améliorez votre communication et votre aisance en public."},
-  {name:"E-commerce", desc:"Créer et gérer votre boutique en ligne rentable."},
-  {name:"BTP & Architecture", desc:"Formation spécialisée pour le secteur BTP et architecture."},
-  {name:"Coiffure", desc:"Techniques professionnelles pour devenir coiffeur expert."},
-  {name:"Agriculture", desc:"Formation pratique pour améliorer votre production agricole."},
-  {name:"Élevage", desc:"Apprenez à gérer et optimiser un élevage rentable."}
- ]
+cat:"🎓 Formations",
+img:"images/formations.jpg",
+items:[
+{name:"🎓 Anglais complet", desc:"Cours complet d'anglais pour tous niveaux avec exercices pratiques et conversation."},
+{name:"💻 Informatique de base", desc:"Apprenez les bases de l'informatique et maîtrisez vos outils essentiels."},
+{name:"📈 Marketing digital", desc:"Stratégies efficaces pour développer votre business en ligne."},
+{name:"🎨 Graphisme", desc:"Design graphique, Photoshop et création de visuels professionnels."},
+{name:"🎬 Montage vidéo", desc:"Créez des vidéos attrayantes pour YouTube, TikTok et réseaux sociaux."},
+{name:"🤖 IA pratique", desc:"Découverte et utilisation pratique de l'intelligence artificielle."},
+{name:"🚢 Import-Export", desc:"Guide complet pour lancer et gérer un business d'import-export."},
+{name:"📊 Gestion de projet", desc:"Planification, organisation et suivi de vos projets."},
+{name:"💼 Vente & closing", desc:"Techniques de vente efficaces et pour conclure vos ventes."},
+{name:"🎤 Prise de parole", desc:"Améliorez votre communication et votre aisance en public."},
+{name:"🛒 E-commerce", desc:"Créer et gérer votre boutique en ligne rentable."},
+{name:"🏗️ BTP & Architecture", desc:"Formation spécialisée pour le secteur BTP et architecture."},
+{name:"💇 Coiffure", desc:"Techniques professionnelles pour devenir coiffeur expert."},
+{name:"🌱 Agriculture", desc:"Améliorer votre production agricole efficacement."},
+{name:"🐄 Élevage", desc:"Apprenez à gérer et optimiser un élevage rentable."}
+]
 },
 {
- cat:"Business",
- img:"images/business.jpg",
- items:[
-  {name:"Ebook business", desc:"Ebooks spécialisés pour lancer et gérer votre entreprise efficacement."},
-  {name:"Templates business", desc:"Modèles professionnels pour documents, présentations et contrats."},
-  {name:"CV professionnels", desc:"Créer des CV percutants pour décrocher votre emploi ou stage."},
-  {name:"Présentations pro", desc:"Apprenez à créer des présentations efficaces et attractives."},
-  {name:"Productivité", desc:"Techniques pour améliorer votre gestion du temps et productivité."},
-  {name:"Livres audio motivation", desc:"Ecoutez des livres inspirants pour booster votre motivation."},
-  {name:"Pack démarrage business", desc:"Pack complet pour lancer votre business rapidement et efficacement."}
- ]
+cat:"🔐 Cybersécurité",
+img:"images/cyber.jpg",
+items:[
+{name:"🔐 Certification Cybersécurité Débutant → Expert (Partie 1)", desc:"Module 1 pour débuter et progresser rapidement en cybersécurité."},
+{name:"🔐 Certification Cybersécurité Débutant → Expert (Partie 2)", desc:"Module 2 pour approfondir vos compétences en cybersécurité."},
+{name:"👨‍💻 Guide Ultime du Hacker Éthique", desc:"Apprenez le hacking éthique de manière pratique avec ChatGPT."},
+{name:"📡 WiFi Hacking – Cours complet", desc:"Techniques pour tester et sécuriser les réseaux Wi-Fi."},
+{name:"🐧 Kali Linux – Essentiel", desc:"Maîtrisez Kali Linux pour vos audits et tests de sécurité."},
+{name:"🌐 Dark Web – Comprendre & se protéger", desc:"Découvrez le Dark Web et ses usages de manière sécurisée."},
+{name:"🔒 Sécurité informatique avancée", desc:"Approfondissez les techniques de protection et tests d'intrusion."},
+{name:"🛡️ Fondements de la cybersécurité", desc:"Bases théoriques et pratiques pour comprendre la cybersécurité."},
+{name:"🔑 OpenSSL & cryptage", desc:"Apprenez à chiffrer vos données et communications."},
+{name:"🌍 Sécuriser un site avec SSL", desc:"Guide pratique pour installer et configurer SSL sur votre site."},
+{name:"🔥 Super Pack Cybersécurité", desc:"Pack complet incluant tous les cours et ressources cybersécurité."},
+{name:"🚀 Super Pack Hacker Éthique", desc:"Pack ultime pour devenir un hacker éthique certifié."}
+]
 },
 {
- cat:"Digital",
- img:"images/digital.jpg",
- items:[
-  {name:"Développement web", desc:"Apprenez à coder et créer des sites web modernes et fonctionnels."},
-  {name:"Création de contenu", desc:"Techniques pour produire du contenu attractif pour réseaux sociaux et blogs."},
-  {name:"Prompts IA", desc:"Prompts avancés pour exploiter l'IA dans vos projets professionnels."},
-  {name:"Logiciels utiles", desc:"Liste et tutoriels pour utiliser des logiciels indispensables au digital."},
-  {name:"Bibliothèque PDF", desc:"Collection de ressources PDF utiles pour l’apprentissage digital."}
- ]
+cat:"💼 Business & Digital",
+img:"images/business.jpg",
+items:[
+{name:"📘 Ebook business", desc:"Ebooks spécialisés pour lancer et gérer votre entreprise efficacement."},
+{name:"📂 Templates business", desc:"Modèles professionnels pour documents, présentations et contrats."},
+{name:"📄 CV professionnels", desc:"Créer des CV percutants pour décrocher votre emploi ou stage."},
+{name:"📊 Présentations pro", desc:"Apprenez à créer des présentations efficaces et attractives."},
+{name:"⏱️ Productivité", desc:"Techniques pour améliorer votre gestion du temps et productivité."},
+{name:"🎧 Audio motivation", desc:"Ecoutez des livres inspirants pour booster votre motivation."},
+{name:"🎥 Création de contenu", desc:"Techniques pour produire du contenu attractif pour réseaux sociaux et blogs."},
+{name:"🤖 Prompts IA", desc:"Prompts avancés pour exploiter l'IA dans vos projets professionnels."},
+{name:"🌐 Développement web", desc:"Apprenez à coder et créer des sites web modernes et fonctionnels."}
+]
 },
 {
- cat:"Packs",
- img:"images/packs.jpg",
- items:[
-  {name:"Mini Pack Formations", desc:"Sélection de formations essentielles pour débuter dans le digital."},
-  {name:"Mini Pack Business", desc:"Ressources clés pour lancer votre business facilement."},
-  {name:"Mini Pack Digital", desc:"Outils et guides pour travailler efficacement dans le digital."},
-  {name:"Super Pack Global", desc:"Pack complet avec toutes les ressources essentielles pour le succès."},
-  {name:"Super Pack Premium (Tout inclus)", desc:"Le pack ultime incluant toutes les formations, ebooks et outils premium."}
- ]
-},
-{
- cat:"Cybersécurité & Hacking",
- img:"images/cyber.jpg",
- items:[
-  {name:"Certification Cybersécurité Débutant à Expert – Partie 1", desc:"Module 1 pour débuter et progresser rapidement en cybersécurité."},
-  {name:"Certification Cybersécurité Débutant à Expert – Partie 2", desc:"Module 2 pour approfondir vos compétences en cybersécurité."},
-  {name:"Guide Ultime du Hacker Éthique (via ChatGPT)", desc:"Apprenez le hacking éthique de manière pratique avec ChatGPT."},
-  {name:"Cybersécurité & gouvernance pour les leaders", desc:"Formation pour dirigeants sur la sécurité informatique et gouvernance."},
-  {name:"Améliorer le Wi-Fi de votre PME", desc:"Techniques pour sécuriser et optimiser votre réseau Wi-Fi professionnel."},
-  {name:"Hacking Éthique – Le cours complet", desc:"Cours complet pour devenir un hacker éthique certifié."},
-  {name:"Hacking Éthique – Metasploit & Exploits Zero-days", desc:"Maîtrisez les outils avancés de test d’intrusion."},
-  {name:"Hacking Éthique – Ingénierie sociale", desc:"Comprendre et utiliser l’ingénierie sociale pour tests éthiques."},
-  {name:"Hacking Éthique – Hacker Facebook", desc:"Techniques de sécurité et test d’accès sur plateformes sociales."},
-  {name:"Sécurité Internet : mots de passe & bonnes pratiques", desc:"Guide complet pour protéger vos comptes et données."},
-  {name:"WiFi Hacking – Cours complet", desc:"Apprenez à tester et sécuriser les réseaux Wi-Fi."},
-  {name:"L’essentiel de Kali Linux", desc:"Maîtrisez Kali Linux pour vos audits et tests de sécurité."},
-  {name:"Apprendre le piratage éthique (débutant à expert)", desc:"Devenez un expert en sécurité informatique étape par étape."},
-  {name:"Sécurité informatique – Niveau avancé", desc:"Approfondissement des techniques de protection et tests d’intrusion."},
-  {name:"Cours complet sur le Dark Web", desc:"Découvrez le Dark Web et ses usages de manière sécurisée."},
-  {name:"Fondements de la cybersécurité", desc:"Bases théoriques et pratiques pour comprendre la cybersécurité."},
-  {name:"OpenSSL & cryptage des données", desc:"Apprenez à chiffrer vos données et communications."},
-  {name:"Sécuriser son site avec un certificat SSL", desc:"Guide pratique pour installer et configurer SSL sur votre site."}
- ]
+cat:"📦 Packs Premium",
+img:"images/packs.jpg",
+items:[
+{name:"📦 Mini Pack Formations", desc:"Sélection de formations essentielles pour débuter dans le digital."},
+{name:"📦 Mini Pack Business", desc:"Ressources clés pour lancer votre business facilement."},
+{name:"📦 Mini Pack Digital", desc:"Outils et guides pour travailler efficacement dans le digital."},
+{name:"🔥 Super Pack Global", desc:"Pack complet avec toutes les ressources essentielles pour le succès."},
+{name:"👑 Super Pack Premium (Tout inclus)", desc:"Le pack ultime incluant toutes les formations, ebooks et outils premium."}
+]
 }
 ];
 
 var shelves=document.getElementById("shelves");
 
 function render(filter){
- shelves.innerHTML="";
- for(var i=0;i<data.length;i++){
-  var shelf=data[i];
-  var html="<div class='shelf'><div class='shelf-title'><img src='"+shelf.img+"'><h3>"+shelf.cat+"</h3></div><div class='products'>";
-  for(var j=0;j<shelf.items.length;j++){
-   var item=shelf.items[j];
-   if(!filter || item.name.toLowerCase().indexOf(filter)>=0){
-    html+="<div class='card'><h4>"+item.name+"</h4><p>"+item.desc+"</p><p><strong>2 500 FCFA</strong></p><button onclick=\"buy('"+item.name+"')\">Acheter</button></div>";
-   }
-  }
-  html+="</div></div>";
-  shelves.innerHTML+=html;
- }
+shelves.innerHTML="";
+for(var i=0;i<data.length;i++){
+var s=data[i];
+var html="<div class='shelf'><div class='shelf-title'><img src='"+s.img+"'><h3>"+s.cat+"</h3></div><div class='products'>";
+for(var j=0;j<s.items.length;j++){
+var item=s.items[j];
+if(!filter||item.name.toLowerCase().indexOf(filter)>=0){
+var pack=item.name.indexOf("Pack")>-1?"pack":"";
+var price=pack?"15 000 FCFA (~23 €)":"2 500 FCFA (~3,80 €)";
+html+="<div class='card "+pack+"'><h4>"+item.name+"</h4><p>"+item.desc+"</p><p class='price'>"+price+"</p><button onclick=\"buy('"+item.name+"')\">Acheter</button></div>";
+}
+}
+html+="</div></div>";
+shelves.innerHTML+=html;
+}
 }
 
 function buy(name){
- selectedProduct=name;
- document.getElementById("formSection").style.display="block";
- window.scrollTo(0,document.body.scrollHeight);
+selectedProduct=name;
+document.getElementById("formSection").style.display="block";
+window.scrollTo(0,document.body.scrollHeight);
 }
 
 function submitOrder(e){
- e.preventDefault();
- var name=document.getElementById("name").value;
- var email=document.getElementById("email").value;
- var country=document.getElementById("country").value;
- var ref="CMD-"+Math.floor(Math.random()*100000);
- var msg="Bonjour Emmanuel,%0ACommande : "+selectedProduct+
- "%0ANom : "+name+
- "%0AEmail : "+email+
- "%0APays : "+country+
- "%0ARef : "+ref;
- var wa=document.getElementById("whatsappLink");
- wa.href="https://wa.me/241066509602?text="+msg;
- wa.style.display="block";
+e.preventDefault();
+var name=document.getElementById("name").value;
+var email=document.getElementById("email").value;
+var country=document.getElementById("country").value;
+var ref="CMD-"+Math.floor(Math.random()*100000);
+var msg="Bonjour Emmanuel,%0ACommande : "+selectedProduct+
+"%0ANom : "+name+
+"%0AEmail : "+email+
+"%0APays : "+country+
+"%0ARef : "+ref;
+var wa=document.getElementById("whatsappLink");
+wa.href="https://wa.me/241066509602?text="+msg;
+wa.style.display="block";
 }
 
 document.getElementById("search").onkeyup=function(){
- render(this.value.toLowerCase());
+render(this.value.toLowerCase());
 };
-
 render("");
 </script>
 
 </body>
 </html>
-
