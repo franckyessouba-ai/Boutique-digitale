@@ -172,6 +172,58 @@ footer{
 <footer>© 2025 Emmanuel Digital Store</footer>
 
 <script>
+// ===== PRÉCHARGEMENT DES PRODUITS =====
+if(!localStorage.getItem("products")){
+  const defaultProducts = [
+    {title:"🎓 Anglais complet", desc:"Formation complète pour parler et comprendre l’anglais.", price:2500, image:"images/formations.jpg"},
+    {title:"💻 Informatique de base", desc:"Maîtriser l’ordinateur, Windows et Internet.", price:2500, image:"images/formations.jpg"},
+    {title:"📈 Marketing digital", desc:"Stratégies pour vendre et se promouvoir en ligne.", price:2500, image:"images/formations.jpg"},
+    {title:"🎨 Graphisme", desc:"Création de visuels professionnels (logos, flyers).", price:2500, image:"images/formations.jpg"},
+    {title:"🎬 Montage vidéo", desc:"Montage vidéo pour réseaux sociaux et YouTube.", price:2500, image:"images/formations.jpg"},
+    {title:"🤖 IA pratique", desc:"Utiliser l’intelligence artificielle au quotidien.", price:2500, image:"images/formations.jpg"},
+    {title:"🚢 Import-Export", desc:"Comprendre le commerce international.", price:2500, image:"images/formations.jpg"},
+    {title:"📊 Gestion de projet", desc:"Organisation et pilotage de projets.", price:2500, image:"images/formations.jpg"},
+    {title:"💼 Vente & closing", desc:"Techniques de persuasion et de vente.", price:2500, image:"images/formations.jpg"},
+    {title:"🎤 Prise de parole", desc:"S’exprimer avec assurance en public.", price:2500, image:"images/formations.jpg"},
+    {title:"🛒 E-commerce", desc:"Créer et gérer une boutique en ligne.", price:2500, image:"images/formations.jpg"},
+    {title:"🏗️ BTP & Architecture", desc:"Bases essentielles du bâtiment.", price:2500, image:"images/formations.jpg"},
+    {title:"💇 Coiffure", desc:"Techniques professionnelles de coiffure.", price:2500, image:"images/formations.jpg"},
+    {title:"🌱 Agriculture", desc:"Agriculture moderne et rentable.", price:2500, image:"images/formations.jpg"},
+    {title:"🐄 Élevage", desc:"Bases de l’élevage animal.", price:2500, image:"images/formations.jpg"},
+
+    {title:"📘 Ebook business", desc:"Stratégies pour entreprendre et réussir.", price:2500, image:"images/business.jpg"},
+    {title:"📂 Templates business", desc:"Documents professionnels prêts à l’emploi.", price:2500, image:"images/business.jpg"},
+    {title:"📄 CV professionnels", desc:"CV modernes pour décrocher un emploi.", price:2500, image:"images/business.jpg"},
+    {title:"📊 Présentations pro", desc:"Présentations PowerPoint professionnelles.", price:2500, image:"images/business.jpg"},
+    {title:"⏱️ Productivité", desc:"Méthodes pour mieux gérer son temps.", price:2500, image:"images/business.jpg"},
+    {title:"🎧 Audio motivation", desc:"Audios pour rester motivé et discipliné.", price:2500, image:"images/business.jpg"},
+    {title:"📦 Mini Pack Business", desc:"Regroupement d’outils business essentiels.", price:5000, image:"images/packs.jpg"},
+
+    {title:"🌐 Développement web", desc:"Créer des sites web modernes.", price:2500, image:"images/digital.jpg"},
+    {title:"🎥 Création de contenu", desc:"Créer du contenu engageant.", price:2500, image:"images/digital.jpg"},
+    {title:"🤖 Prompts IA", desc:"Prompts efficaces pour l’IA.", price:2500, image:"images/digital.jpg"},
+    {title:"💾 Logiciels utiles", desc:"Logiciels indispensables au quotidien.", price:2500, image:"images/digital.jpg"},
+    {title:"📚 Bibliothèque PDF", desc:"Collection de ressources PDF.", price:2500, image:"images/digital.jpg"},
+
+    {title:"📦 Mini Pack Formations", desc:"Plusieurs formations réunies.", price:5000, image:"images/packs.jpg"},
+    {title:"📦 Mini Pack Digital", desc:"Outils digitaux essentiels.", price:5000, image:"images/packs.jpg"},
+    {title:"🔥 Super Pack Global", desc:"Tous les produits réunis.", price:15000, image:"images/packs.jpg"},
+    {title:"👑 Super Pack Premium", desc:"Pack ultime tout inclus.", price:15000, image:"images/packs.jpg"},
+
+    {title:"🔐 Cybersécurité Débutant → Expert (Partie 1)", desc:"Bases solides de la cybersécurité.", price:2500, image:"images/cyber.jpg"},
+    {title:"🔐 Cybersécurité Débutant → Expert (Partie 2)", desc:"Techniques avancées de sécurité.", price:2500, image:"images/cyber.jpg"},
+    {title:"👨‍💻 Hacker éthique", desc:"Apprendre le hacking légal.", price:2500, image:"images/cyber.jpg"},
+    {title:"🐧 Kali Linux", desc:"Outils de pentesting.", price:2500, image:"images/cyber.jpg"},
+    {title:"📶 WiFi Hacking", desc:"Sécurisation et tests WiFi.", price:2500, image:"images/cyber.jpg"},
+    {title:"🌐 Dark Web", desc:"Comprendre le Dark Web.", price:2500, image:"images/cyber.jpg"},
+    {title:"🔥 Super Pack Cybersécurité", desc:"Toutes les formations cybersécurité.", price:15000, image:"images/cyber.jpg"}
+  ];
+
+  localStorage.setItem("products", JSON.stringify(defaultProducts));
+}
+</script>
+
+<script>
 let selectedProduct=null;
 const catalog=document.getElementById("catalog");
 const products=JSON.parse(localStorage.getItem("products"))||[];
@@ -238,4 +290,4 @@ render();
 </script>
 
 </body>
-</html>
+  </html>
