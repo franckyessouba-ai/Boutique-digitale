@@ -235,7 +235,7 @@ var s=data[i];
 var html="<div class='shelf'><div class='shelf-title'><img src='"+s.img+"'><h3>"+s.cat+"</h3></div><div class='products'>";
 for(var j=0;j<s.items.length;j++){
 var name=s.items[j];
-if(!filter||name.toLowerCase().indexOf(filter)>=0){
+
 var price = "2 500 FCFA (~3,80 €)";
 
 if(name.includes("Mini Pack")){
@@ -245,8 +245,7 @@ if(name.includes("Mini Pack")){
 if(name.includes("Super Pack")){
   price = "15 000 FCFA (~23 €)";
 }
-html+="<div class='card "+pack+"'><h4>"+name+"</h4><p>Ressource numérique premium</p><p class='price'>"+price+"</p><button onclick=\"buy('"+name+"')\">Acheter</button></div>";
-}
+
 }
 html+="</div></div>";
 shelves.innerHTML+=html;
@@ -283,4 +282,5 @@ render("");
 
 </body>
 </html>
+
 
