@@ -194,64 +194,69 @@ footer{
 <footer>© 2025 Emmanuel Digital Store</footer>
 
 <script>
-// ---- Tous les produits directement en mémoire ----
-const products = [
-  // FORMATIONS (15)
-  {title:"🎓 Anglais complet", desc:"Formation complète pour parler et comprendre l’anglais.", price:2500, category:"Formations"},
-  {title:"💻 Informatique de base", desc:"Maîtriser l’ordinateur, Windows et Internet.", price:2500, category:"Formations"},
-  {title:"📈 Marketing digital", desc:"Stratégies pour vendre et se promouvoir en ligne.", price:2500, category:"Formations"},
-  {title:"🎨 Graphisme", desc:"Création de visuels professionnels (logos, flyers).", price:2500, category:"Formations"},
-  {title:"🎬 Montage vidéo", desc:"Montage vidéo pour réseaux sociaux et YouTube.", price:2500, category:"Formations"},
-  {title:"🤖 IA pratique", desc:"Utiliser l’intelligence artificielle au quotidien.", price:2500, category:"Formations"},
-  {title:"🚢 Import-Export", desc:"Comprendre le commerce international.", price:2500, category:"Formations"},
-  {title:"📊 Gestion de projet", desc:"Organisation et pilotage de projets.", price:2500, category:"Formations"},
-  {title:"💼 Vente & closing", desc:"Techniques de persuasion et de vente.", price:2500, category:"Formations"},
-  {title:"🎤 Prise de parole", desc:"S’exprimer avec assurance en public.", price:2500, category:"Formations"},
-  {title:"🛒 E-commerce", desc:"Créer et gérer une boutique en ligne.", price:2500, category:"Formations"},
-  {title:"🏗️ BTP & Architecture", desc:"Bases essentielles du bâtiment.", price:2500, category:"Formations"},
-  {title:"💇 Coiffure", desc:"Techniques professionnelles de coiffure.", price:2500, category:"Formations"},
-  {title:"🌱 Agriculture", desc:"Agriculture moderne et rentable.", price:2500, category:"Formations"},
-  {title:"🐄 Élevage", desc:"Bases de l’élevage animal.", price:2500, category:"Formations"},
+// ===== Préchargement des 50+ produits si localStorage vide =====
+if(!localStorage.getItem("products")){
+  const defaultProducts = [
+    // --- FORMATIONS ---
+    {title:"🎓 Anglais complet", desc:"Formation complète pour parler et comprendre l’anglais.", price:2500, category:"Formations"},
+    {title:"💻 Informatique de base", desc:"Maîtriser l’ordinateur, Windows et Internet.", price:2500, category:"Formations"},
+    {title:"📈 Marketing digital", desc:"Stratégies pour vendre et se promouvoir en ligne.", price:2500, category:"Formations"},
+    {title:"🎨 Graphisme", desc:"Création de visuels professionnels (logos, flyers).", price:2500, category:"Formations"},
+    {title:"🎬 Montage vidéo", desc:"Montage vidéo pour réseaux sociaux et YouTube.", price:2500, category:"Formations"},
+    {title:"🤖 IA pratique", desc:"Utiliser l’intelligence artificielle au quotidien.", price:2500, category:"Formations"},
+    {title:"🚢 Import-Export", desc:"Comprendre le commerce international.", price:2500, category:"Formations"},
+    {title:"📊 Gestion de projet", desc:"Organisation et pilotage de projets.", price:2500, category:"Formations"},
+    {title:"💼 Vente & closing", desc:"Techniques de persuasion et de vente.", price:2500, category:"Formations"},
+    {title:"🎤 Prise de parole", desc:"S’exprimer avec assurance en public.", price:2500, category:"Formations"},
+    {title:"🛒 E-commerce", desc:"Créer et gérer une boutique en ligne.", price:2500, category:"Formations"},
+    {title:"🏗️ BTP & Architecture", desc:"Bases essentielles du bâtiment.", price:2500, category:"Formations"},
+    {title:"💇 Coiffure", desc:"Techniques professionnelles de coiffure.", price:2500, category:"Formations"},
+    {title:"🌱 Agriculture", desc:"Agriculture moderne et rentable.", price:2500, category:"Formations"},
+    {title:"🐄 Élevage", desc:"Bases de l’élevage animal.", price:2500, category:"Formations"},
 
-  // BUSINESS (7)
-  {title:"📘 Ebook business", desc:"Stratégies pour entreprendre et réussir.", price:2500, category:"Business"},
-  {title:"📂 Templates business", desc:"Documents professionnels prêts à l’emploi.", price:2500, category:"Business"},
-  {title:"📄 CV professionnels", desc:"CV modernes pour décrocher un emploi.", price:2500, category:"Business"},
-  {title:"📊 Présentations pro", desc:"Présentations PowerPoint professionnelles.", price:2500, category:"Business"},
-  {title:"⏱️ Productivité", desc:"Méthodes pour mieux gérer son temps.", price:2500, category:"Business"},
-  {title:"🎧 Audio motivation", desc:"Audios pour rester motivé et discipliné.", price:2500, category:"Business"},
-  {title:"📦 Mini Pack Business", desc:"Regroupement d’outils business essentiels.", price:5000, category:"Packs"},
+    // --- BUSINESS ---
+    {title:"📘 Ebook business", desc:"Stratégies pour entreprendre et réussir.", price:2500, category:"Business"},
+    {title:"📂 Templates business", desc:"Documents professionnels prêts à l’emploi.", price:2500, category:"Business"},
+    {title:"📄 CV professionnels", desc:"CV modernes pour décrocher un emploi.", price:2500, category:"Business"},
+    {title:"📊 Présentations pro", desc:"Présentations PowerPoint professionnelles.", price:2500, category:"Business"},
+    {title:"⏱️ Productivité", desc:"Méthodes pour mieux gérer son temps.", price:2500, category:"Business"},
+    {title:"🎧 Audio motivation", desc:"Audios pour rester motivé et discipliné.", price:2500, category:"Business"},
+    {title:"📦 Mini Pack Business", desc:"Regroupement d’outils business essentiels.", price:5000, category:"Packs"},
 
-  // DIGITAL (5)
-  {title:"🌐 Développement web", desc:"Créer des sites web modernes.", price:2500, category:"Digital"},
-  {title:"🎥 Création de contenu", desc:"Créer du contenu engageant.", price:2500, category:"Digital"},
-  {title:"🤖 Prompts IA", desc:"Prompts efficaces pour l’IA.", price:2500, category:"Digital"},
-  {title:"💾 Logiciels utiles", desc:"Logiciels indispensables au quotidien.", price:2500, category:"Digital"},
-  {title:"📚 Bibliothèque PDF", desc:"Collection de ressources PDF.", price:2500, category:"Digital"},
+    // --- DIGITAL ---
+    {title:"🌐 Développement web", desc:"Créer des sites web modernes.", price:2500, category:"Digital"},
+    {title:"🎥 Création de contenu", desc:"Créer du contenu engageant.", price:2500, category:"Digital"},
+    {title:"🤖 Prompts IA", desc:"Prompts efficaces pour l’IA.", price:2500, category:"Digital"},
+    {title:"💾 Logiciels utiles", desc:"Logiciels indispensables au quotidien.", price:2500, category:"Digital"},
+    {title:"📚 Bibliothèque PDF", desc:"Collection de ressources PDF.", price:2500, category:"Digital"},
 
-  // PACKS (4)
-  {title:"📦 Mini Pack Formations", desc:"Plusieurs formations réunies.", price:5000, category:"Packs"},
-  {title:"📦 Mini Pack Digital", desc:"Outils digitaux essentiels.", price:5000, category:"Packs"},
-  {title:"🔥 Super Pack Global", desc:"Tous les produits réunis.", price:15000, category:"Packs"},
-  {title:"👑 Super Pack Premium", desc:"Pack ultime tout inclus.", price:15000, category:"Packs"},
+    // --- PACKS ---
+    {title:"📦 Mini Pack Formations", desc:"Plusieurs formations réunies.", price:5000, category:"Packs"},
+    {title:"📦 Mini Pack Digital", desc:"Outils digitaux essentiels.", price:5000, category:"Packs"},
+    {title:"🔥 Super Pack Global", desc:"Tous les produits réunis.", price:15000, category:"Packs"},
+    {title:"👑 Super Pack Premium", desc:"Pack ultime tout inclus.", price:15000, category:"Packs"},
 
-  // CYBERSÉCURITÉ (7)
-  {title:"🔐 Cybersécurité Débutant → Expert (Partie 1)", desc:"Bases solides de la cybersécurité.", price:2500, category:"Cybersécurité"},
-  {title:"🔐 Cybersécurité Débutant → Expert (Partie 2)", desc:"Techniques avancées de sécurité.", price:2500, category:"Cybersécurité"},
-  {title:"👨‍💻 Hacker éthique", desc:"Apprendre le hacking légal.", price:2500, category:"Cybersécurité"},
-  {title:"🐧 Kali Linux", desc:"Outils de pentesting.", price:2500, category:"Cybersécurité"},
-  {title:"📶 WiFi Hacking", desc:"Sécurisation et tests WiFi.", price:2500, category:"Cybersécurité"},
-  {title:"🌐 Dark Web", desc:"Comprendre le Dark Web.", price:2500, category:"Cybersécurité"},
-  {title:"🔥 Super Pack Cybersécurité", desc:"Toutes les formations cybersécurité.", price:15000, category:"Cybersécurité"}
-];
+    // --- CYBERSÉCURITÉ ---
+    {title:"🔐 Cybersécurité Débutant → Expert (Partie 1)", desc:"Bases solides de la cybersécurité.", price:2500, category:"Cybersécurité"},
+    {title:"🔐 Cybersécurité Débutant → Expert (Partie 2)", desc:"Techniques avancées de sécurité.", price:2500, category:"Cybersécurité"},
+    {title:"👨‍💻 Hacker éthique", desc:"Apprendre le hacking légal.", price:2500, category:"Cybersécurité"},
+    {title:"🐧 Kali Linux", desc:"Outils de pentesting.", price:2500, category:"Cybersécurité"},
+    {title:"📶 WiFi Hacking", desc:"Sécurisation et tests WiFi.", price:2500, category:"Cybersécurité"},
+    {title:"🌐 Dark Web", desc:"Comprendre le Dark Web.", price:2500, category:"Cybersécurité"},
+    {title:"🔥 Super Pack Cybersécurité", desc:"Toutes les formations cybersécurité.", price:15000, category:"Cybersécurité"}
+  ];
+  localStorage.setItem("products", JSON.stringify(defaultProducts));
+}
 
+// ----- Récupérer depuis localStorage -----
+const products = JSON.parse(localStorage.getItem("products")) || [];
 let selectedProduct = null;
 const catalog = document.getElementById("catalog");
 
 // Grouper par catégorie
 function groupProducts() {
   const groups = {};
-  products.forEach(p=>{
+  products.forEach(p => {
     if(!groups[p.category]) groups[p.category] = [];
     groups[p.category].push(p);
   });
@@ -308,10 +313,9 @@ Référence : ${ref}`;
   wa.style.display = "block";
 }
 
-const search = document.getElementById("search");
-search.onkeyup = () => render(search.value.toLowerCase());
+document.getElementById("search").onkeyup = () => render(document.getElementById("search").value.toLowerCase());
 render();
 </script>
 
 </body>
-  </html>
+      </html>
